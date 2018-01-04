@@ -5,14 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-
+/**
+ * Objeto que representa la clave unica de relacion usuario/segmento
+ * 
+ * @author William Aviles
+ **/
 @Embeddable
 public class UsuarioSegmentoId implements Serializable {
-	/**
-	 * Objeto que representa la clave unica de relacion usuario/segmento
-	 * 
-	 * @author William Aviles
-	 **/
+
 	
 	private static final long serialVersionUID = 1L;
 	private String usuario;

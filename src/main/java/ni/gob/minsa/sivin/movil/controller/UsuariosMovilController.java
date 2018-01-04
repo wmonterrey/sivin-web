@@ -18,10 +18,14 @@ import ni.gob.minsa.sivin.users.model.Authority;
 import ni.gob.minsa.sivin.users.model.UserSistema;
 
 /**
- * Maneja las solicitudes que van a la aplicacion relacionadas a json
+ * Controlador que provee los mapeos de la aplicacion movil para:
  * 
- * @author Brenda Lopez
- */
+ * <ul>
+ * <li>Ingreso de usuario
+ * </ul>
+ * 
+ * @author William Aviles
+ **/
 @Controller
 @RequestMapping("/movil/*")
 public class UsuariosMovilController {
@@ -29,7 +33,11 @@ public class UsuariosMovilController {
 	private UsuarioService usuarioService;
 	private static final Logger logger = LoggerFactory.getLogger(UsuariosMovilController.class);
 	
-	
+	/**
+     * Retorna un usuario. Acepta una solicitud GET para JSON
+     * @param username Nombre del usuario.
+     * @return <code>UserSistema</code>
+     */
 	@RequestMapping(value = "ingreso/{username}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody UserSistema getMessage(@PathVariable String username) {
     	logger.info("Accessando a la aplicacion " + username);
@@ -39,6 +47,7 @@ public class UsuariosMovilController {
 	
     /**
      * Retorna roles. Acepta una solicitud GET para JSON
+     * @param username Nombre del usuario.
      * @return roles JSON
      */
     @RequestMapping(value = "roles/{username}", method = RequestMethod.GET, produces = "application/json")
@@ -60,6 +69,7 @@ public class UsuariosMovilController {
     
     /**
      * Retorna segmentos. Acepta una solicitud GET para JSON
+     * @param username Nombre del usuario.
      * @return segmentos JSON
      */
     @RequestMapping(value = "segmentos/{username}", method = RequestMethod.GET, produces = "application/json")

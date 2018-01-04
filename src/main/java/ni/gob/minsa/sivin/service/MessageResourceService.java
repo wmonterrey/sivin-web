@@ -100,7 +100,7 @@ public class MessageResourceService {
 
 	/**
 	 * Guarda un mensaje
-	 * 
+	 * @param message el mensaje a ser guardado 
 	 * 
 	 */
 	public void saveMensaje(MessageResource message) {

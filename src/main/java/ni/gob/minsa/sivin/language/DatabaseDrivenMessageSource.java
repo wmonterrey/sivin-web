@@ -9,7 +9,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ni.gob.minsa.sivin.service.MessageResourceService;
-
+/**
+ * Servicio que provee mensajes a Spring desde la base de datos
+ * 
+ * @author William Aviles
+ **/
 @Service("messageSource")
 public class DatabaseDrivenMessageSource extends DataBaseDrivenMessageSourceBase {
 	

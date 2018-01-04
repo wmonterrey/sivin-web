@@ -12,10 +12,14 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * Controlador que provee los mapeos de la aplicacion movil para:
  * 
+ * <ul>
+ * <li>Pedir los catalogos de la aplicacion
+ * </ul>
  * 
- * 
- */
+ * @author William Aviles
+ **/
 @Controller
 @RequestMapping("/movil/*")
 public class MessageResourceController {
@@ -25,6 +29,10 @@ public class MessageResourceController {
     @Resource(name = "messageResourceService")
     private MessageResourceService messageResourceService;
 
+    /**
+     * Retorna catalogos. Acepta una solicitud GET para JSON
+     * @return catalogos JSON
+     */
     @RequestMapping(value = "catalogos", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     List<MessageResource> getMessageResources(){

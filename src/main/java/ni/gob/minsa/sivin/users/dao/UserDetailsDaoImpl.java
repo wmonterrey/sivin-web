@@ -16,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ni.gob.minsa.sivin.users.model.UserAccess;
 import ni.gob.minsa.sivin.users.model.UserAttempts;
 import ni.gob.minsa.sivin.users.model.UserSistema;
-
+/**
+ * Servicio que provee guardar las transacciones de usuarios en la base de datos
+ * 
+ * @author William Aviles
+ **/
 @Transactional
 public class UserDetailsDaoImpl implements UserDetailsDao {
 	

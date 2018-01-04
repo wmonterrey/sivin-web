@@ -2,6 +2,29 @@ package ni.gob.minsa.sivin.domain.audit;
 
 import java.util.Date;
 
+/**
+ * AuditTrail es la clase que representa el registro de auditoría en el sistema.
+ * 
+ * AuditTrail incluye información como:
+ * 
+ * <ul>
+ * <li>Clase
+ * <li>Propiedad
+ * <li>Valor anterior
+ * <li>Valor actual
+ * <li>Tipo de operación
+ * <li>Usuario
+ * <li>Fecha de operación
+ * </ul>
+ * <p>
+ * 
+ * 
+ *  
+ * @author      William Avilés
+ * @version     1.0
+ * @since       1.0
+ */
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

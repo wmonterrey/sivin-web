@@ -10,7 +10,26 @@ import javax.persistence.UniqueConstraint;
 
 import ni.gob.minsa.sivin.domain.audit.Auditable;
 
-
+/**
+ * MessageResource es la clase que representa el registro de catalogos y mensajes en el sistema.
+ * 
+ * MessageResource incluye información como:
+ * 
+ * <ul>
+ * <li>Clave del mensaje
+ * <li>Catalogo al que pertenece
+ * <li>Clave del catalogo
+ * <li>Valor en español
+ * <li>Valor en inglés
+ * </ul>
+ * <p>
+ * 
+ * 
+ *  
+ * @author      William Avilés
+ * @version     1.0
+ * @since       1.0
+ */
 @Entity
 @Table(name = "mensajes", catalog = "sivin", uniqueConstraints={@UniqueConstraint(columnNames = {"catRoot" , "catKey"})})
 public class MessageResource implements Serializable, Auditable{

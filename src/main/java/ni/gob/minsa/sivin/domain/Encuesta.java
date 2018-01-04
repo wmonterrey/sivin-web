@@ -48,6 +48,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String jefeFamilia;
 	private String sexJefeFamilia;
 	private Integer numPersonas;
+	private Encuestador encuestador;
+	private Supervisor supervisor;
 	//Seccion A
 	private String agua;
 	private String oagua;
@@ -88,16 +90,19 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String hierro;
 	private String dHierro;
 	//SECCION C
+	private String numNinos;
 	private String n1;
 	private String n2;
 	private String n3;
 	private String n4;
 	private String n5;
+	private String n6;
 	private String e1;
 	private String e2;
 	private String e3;
 	private String e4;
 	private String e5;
+	private String e6;
 	private String nselec;
 	private String nomselec;
 	private Date fnacselec;
@@ -139,6 +144,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String mParasitario;
 	private String otroMpEsp;
 	private String donMp;
+	private String otroDonMp;
 	private String evitarParasito;
 	private String oEvitarParasito;
 	//SECCION E
@@ -191,8 +197,85 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String marcaSal;
 	private String azucar;
 	private String marcaAzucar;
-	//private String patConsAz;
-	//private String patConsAzFrec;
+	// SECCION H
+	private String patConsAzuc;
+	private String patConsAzucFrec;
+	private String patConsSal;
+	private String patConsSalFrec;
+	private String patConsArroz;
+	private String patConsArrozFrec;
+	private String patConsAcei;
+	private String patConsAceiFrec;
+	private String patConsFri;
+	private String patConsFriFrec;
+	private String patConsCebo;
+	private String patConsCeboFrec;
+	private String patConsChi;
+	private String patConsChiFrec;
+	private String patConsQue;
+	private String patConsQueFrec;
+	private String patConsCafe;
+	private String patConsCafeFrec;
+	private String patConsTor;
+	private String patConsTorFrec;
+	private String patConsCar;
+	private String patConsCarFrec;
+	private String patConsHue;
+	private String patConsHueFrec;
+	private String patConsPan;
+	private String patConsPanFrec;
+	private String patConsBan;
+	private String patConsBanFrec;
+	private String patConsPanDul;
+	private String patConsPanDulFrec;
+	private String patConsPla;
+	private String patConsPlaFrec;
+	private String patConsPapa;
+	private String patConsPapaFrec;
+	private String patConsLec;
+	private String patConsLecFrec;
+	private String patConsSalTom;
+	private String patConsSalTomFrec;
+	private String patConsGas;
+	private String patConsGasFrec;
+	private String patConsCarRes;
+	private String patConsCarResFrec;
+	private String patConsAvena;
+	private String patConsAvenaFrec;
+	private String patConsNaran;
+	private String patConsNaranFrec;
+	private String patConsPasta;
+	private String patConsPastaFrec;
+	private String patConsAyote;
+	private String patConsAyoteFrec;
+	private String patConsMagg;
+	private String patConsMaggFrec;
+	private String patConsFrut;
+	private String patConsFrutFrec;
+	private String patConsRaic;
+	private String patConsRaicFrec;
+	private String patConsMenei;
+	private String patConsMeneiFrec;
+	private String patConsZana;
+	private String patConsZanaFrec;
+	private String patConsPinolillo;
+	private String patConsPinolilloFrec;
+	private String patConsOVerd;
+	private String patConsOVerdFrec;
+	private String patConsPesc;
+	private String patConsPescFrec;
+	private String patConsAlimComp;
+	private String patConsAlimCompFrec;
+	private String patConsLecPol;
+	private String patConsLecPolFrec;
+	private String patConsCarCer;
+	private String patConsCarCerFrec;
+	private String patConsEmb;
+	private String patConsEmbFrec;
+	private String patConsMar;
+	private String patConsMarFrec;
+	private String patConsCarCaza;
+	private String patConsCarCazaFrec;
 	
 	public Encuesta() {
 		super();
@@ -227,7 +310,31 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	public void setSegmento(Segmento segmento) {
 		this.segmento = segmento;
 	}
+	
+	
+	@ManyToOne
+	@JoinColumn(name="encuestador", updatable = false)
+    @ForeignKey(name = "FK_ENCUESTADOR_ENCUESTA")
+	public Encuestador getEncuestador() {
+		return encuestador;
+	}
 
+	public void setEncuestador(Encuestador encuestador) {
+		this.encuestador = encuestador;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="supervisor", updatable = false)
+    @ForeignKey(name = "FK_SUPERVISOR_ENCUESTA")
+	public Supervisor getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	@Column(name = "numEncuesta", nullable = false)
 	public Integer getNumEncuesta() {
 		return numEncuesta;
 	}
@@ -236,7 +343,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.numEncuesta = numEncuesta;
 	}
 
-	@Column(name = "fechaent", nullable = false)
+	@Column(name = "fechaEntrevista", nullable = false)
 	public Date getFechaEntrevista() {
 		return fechaEntrevista;
 	}
@@ -245,7 +352,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.fechaEntrevista = fechaEntrevista;
 	}
 
-	@Column(name = "jefefam", nullable = false, length = 250)
+	@Column(name = "jefeFamilia", nullable = false, length = 250)
 	public String getJefeFamilia() {
 		return jefeFamilia;
 	}
@@ -254,7 +361,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.jefeFamilia = jefeFamilia;
 	}
 
-	@Column(name = "sexjefefam", nullable = false, length = 5)
+	@Column(name = "sexJefeFamilia", nullable = false, length = 5)
 	public String getSexJefeFamilia() {
 		return sexJefeFamilia;
 	}
@@ -263,7 +370,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.sexJefeFamilia = sexJefeFamilia;
 	}
 
-	@Column(name = "numpersonas", nullable = false, length = 2)
+	@Column(name = "numPersonas", nullable = false, length = 2)
 	public Integer getNumPersonas() {
 		return numPersonas;
 	}
@@ -271,8 +378,10 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	public void setNumPersonas(Integer numPersonas) {
 		this.numPersonas = numPersonas;
 	}
+	
+	
 
-	@Column(name = "agua", nullable = true, length = 1)
+	@Column(name = "agua", nullable = true, length = 2)
 	public String getAgua() {
 		return agua;
 	}
@@ -281,7 +390,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.agua = agua;
 	}
 
-	@Column(name = "oagua", nullable = true, length = 155)
+	@Column(name = "oagua", nullable = true, length = 255)
 	public String getOagua() {
 		return oagua;
 	}
@@ -290,7 +399,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.oagua = oagua;
 	}
 
-	@Column(name = "cuartos", nullable = true, length = 1)
+	@Column(name = "cuartos", nullable = true)
 	public Integer getCuartos() {
 		return cuartos;
 	}
@@ -299,7 +408,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.cuartos = cuartos;
 	}
 
-	@Column(name = "lugnecesidades", nullable = true, length = 1)
+	@Column(name = "lugnecesidades", nullable = true, length = 2)
 	public String getLugNecesidades() {
 		return lugNecesidades;
 	}
@@ -308,7 +417,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.lugNecesidades = lugNecesidades;
 	}
 
-	@Column(name = "olugnecesidades", nullable = true, length = 155)
+	@Column(name = "olugnecesidades", nullable = true, length = 255)
 	public String getOlugNecesidades() {
 		return olugNecesidades;
 	}
@@ -317,7 +426,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.olugNecesidades = olugNecesidades;
 	}
 
-	@Column(name = "usacocinar", nullable = true, length = 1)
+	@Column(name = "usacocinar", nullable = true, length = 2)
 	public String getUsaCocinar() {
 		return usaCocinar;
 	}
@@ -326,7 +435,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.usaCocinar = usaCocinar;
 	}
 
-	@Column(name = "ousacocinar", nullable = true, length = 155)
+	@Column(name = "ousacocinar", nullable = true, length = 255)
 	public String getOusaCocinar() {
 		return ousaCocinar;
 	}
@@ -335,7 +444,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.ousaCocinar = ousaCocinar;
 	}
 
-	@Column(name = "articulos", nullable = true, length = 20)
+	@Column(name = "articulos", nullable = true, length = 25)
 	public String getArticulos() {
 		return articulos;
 	}
@@ -344,7 +453,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.articulos = articulos;
 	}
 
-	@Column(name = "oarticulos", nullable = true, length = 155)
+	@Column(name = "oarticulos", nullable = true, length = 255)
 	public String getOarticulos() {
 		return oarticulos;
 	}
@@ -516,7 +625,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.dondeHierro = dondeHierro;
 	}
 
-	@Column(name = "dondehierrobesp", nullable = true, length = 155)
+	@Column(name = "dondehierrobesp", nullable = true, length = 255)
 	public String getDondeHierroBesp() {
 		return dondeHierroBesp;
 	}
@@ -525,7 +634,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.dondeHierroBesp = dondeHierroBesp;
 	}
 
-	@Column(name = "dondehierrofesp", nullable = true, length = 155)
+	@Column(name = "dondehierrofesp", nullable = true, length = 255)
 	public String getDondeHierroFesp() {
 		return dondeHierroFesp;
 	}
@@ -607,6 +716,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	}
 	
 	
+	@Column(name = "numNinos", nullable = true, length = 1)
+	public String getNumNinos() {
+		return numNinos;
+	}
+
+	public void setNumNinos(String numNinos) {
+		this.numNinos = numNinos;
+	}
+
 	@Column(name = "n1", nullable = true, length = 100)
 	public String getN1() {
 		return n1;
@@ -652,6 +770,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.n5 = n5;
 	}
 
+	@Column(name = "n6", nullable = true, length = 100)
+	public String getN6() {
+		return n6;
+	}
+
+	public void setN6(String n6) {
+		this.n6 = n6;
+	}
+
 	@Column(name = "e1", nullable = true, length = 2)
 	public String getE1() {
 		return e1;
@@ -695,6 +822,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	public void setE5(String e5) {
 		this.e5 = e5;
+	}
+	
+	@Column(name = "e6", nullable = true, length = 2)
+	public String getE6() {
+		return e6;
+	}
+
+	public void setE6(String e6) {
+		this.e6 = e6;
 	}
 
 	@Column(name = "nselect", nullable = true, length = 1)
@@ -841,7 +977,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.donhierro = donhierro;
 	}
 
-	@Column(name = "donhierrobesp", nullable = true, length = 155)
+	@Column(name = "donhierrobesp", nullable = true, length = 255)
 	public String getDonhierrobesp() {
 		return donhierrobesp;
 	}
@@ -850,7 +986,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.donhierrobesp = donhierrobesp;
 	}
 
-	@Column(name = "donhierrofesp", nullable = true, length = 155)
+	@Column(name = "donhierrofesp", nullable = true, length = 255)
 	public String getDonhierrofesp() {
 		return donhierrofesp;
 	}
@@ -1039,7 +1175,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.mParasitario = mParasitario;
 	}
 
-	@Column(name = "otroMpEsp", nullable = true, length = 155)
+	@Column(name = "otroMpEsp", nullable = true, length = 255)
 	public String getOtroMpEsp() {
 		return otroMpEsp;
 	}
@@ -1056,6 +1192,17 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	public void setDonMp(String donMp) {
 		this.donMp = donMp;
 	}
+	
+	
+	@Column(name = "otroDonMp", nullable = true, length = 255)
+	public String getOtroDonMp() {
+		return otroDonMp;
+	}
+
+	public void setOtroDonMp(String otroDonMp) {
+		this.otroDonMp = otroDonMp;
+	}
+
 	@Column(name = "evitarParasito", nullable = true, length = 25)
 	public String getEvitarParasito() {
 		return evitarParasito;
@@ -1065,7 +1212,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.evitarParasito = evitarParasito;
 	}
 
-	@Column(name = "oEvitarParasito", nullable = true, length = 155)
+	@Column(name = "oEvitarParasito", nullable = true, length = 255)
 	public String getoEvitarParasito() {
 		return oEvitarParasito;
 	}
@@ -1074,7 +1221,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.oEvitarParasito = oEvitarParasito;
 	}
 	
-	@Column(name = "nlactmat", nullable = true, length = 25)
+	@Column(name = "nlactmat", nullable = true, length = 1)
 	public String getNlactmat() {
 		return nlactmat;
 	}
@@ -1487,6 +1634,708 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	public void setMarcaAzucar(String marcaAzucar) {
 		this.marcaAzucar = marcaAzucar;
+	}
+
+	@Column(name = "patConsAzuc", nullable = true, length = 1)
+	public String getPatConsAzuc() {
+		return patConsAzuc;
+	}
+
+	public void setPatConsAzuc(String patConsAzuc) {
+		this.patConsAzuc = patConsAzuc;
+	}
+
+	@Column(name = "patConsAzucFrec", nullable = true, length = 1)
+	public String getPatConsAzucFrec() {
+		return patConsAzucFrec;
+	}
+
+	public void setPatConsAzucFrec(String patConsAzucFrec) {
+		this.patConsAzucFrec = patConsAzucFrec;
+	}
+
+	@Column(name = "patConsSal", nullable = true, length = 1)
+	public String getPatConsSal() {
+		return patConsSal;
+	}
+
+	public void setPatConsSal(String patConsSal) {
+		this.patConsSal = patConsSal;
+	}
+
+	@Column(name = "patConsSalFrec", nullable = true, length = 1)
+	public String getPatConsSalFrec() {
+		return patConsSalFrec;
+	}
+
+	public void setPatConsSalFrec(String patConsSalFrec) {
+		this.patConsSalFrec = patConsSalFrec;
+	}
+
+	@Column(name = "patConsArroz", nullable = true, length = 1)
+	public String getPatConsArroz() {
+		return patConsArroz;
+	}
+
+	public void setPatConsArroz(String patConsArroz) {
+		this.patConsArroz = patConsArroz;
+	}
+
+	@Column(name = "patConsArrozFrec", nullable = true, length = 1)
+	public String getPatConsArrozFrec() {
+		return patConsArrozFrec;
+	}
+
+	public void setPatConsArrozFrec(String patConsArrozFrec) {
+		this.patConsArrozFrec = patConsArrozFrec;
+	}
+
+	@Column(name = "patConsAcei", nullable = true, length = 1)
+	public String getPatConsAcei() {
+		return patConsAcei;
+	}
+
+	public void setPatConsAcei(String patConsAcei) {
+		this.patConsAcei = patConsAcei;
+	}
+
+	@Column(name = "patConsAceiFrec", nullable = true, length = 1)
+	public String getPatConsAceiFrec() {
+		return patConsAceiFrec;
+	}
+
+	public void setPatConsAceiFrec(String patConsAceiFrec) {
+		this.patConsAceiFrec = patConsAceiFrec;
+	}
+
+	@Column(name = "patConsFri", nullable = true, length = 1)
+	public String getPatConsFri() {
+		return patConsFri;
+	}
+
+	public void setPatConsFri(String patConsFri) {
+		this.patConsFri = patConsFri;
+	}
+
+	@Column(name = "patConsFriFrec", nullable = true, length = 1)
+	public String getPatConsFriFrec() {
+		return patConsFriFrec;
+	}
+
+	public void setPatConsFriFrec(String patConsFriFrec) {
+		this.patConsFriFrec = patConsFriFrec;
+	}
+
+	@Column(name = "patConsCebo", nullable = true, length = 1)
+	public String getPatConsCebo() {
+		return patConsCebo;
+	}
+
+	public void setPatConsCebo(String patConsCebo) {
+		this.patConsCebo = patConsCebo;
+	}
+
+	@Column(name = "patConsCeboFrec", nullable = true, length = 1)
+	public String getPatConsCeboFrec() {
+		return patConsCeboFrec;
+	}
+
+	public void setPatConsCeboFrec(String patConsCeboFrec) {
+		this.patConsCeboFrec = patConsCeboFrec;
+	}
+
+	@Column(name = "patConsChi", nullable = true, length = 1)
+	public String getPatConsChi() {
+		return patConsChi;
+	}
+
+	public void setPatConsChi(String patConsChi) {
+		this.patConsChi = patConsChi;
+	}
+
+	@Column(name = "patConsChiFrec", nullable = true, length = 1)
+	public String getPatConsChiFrec() {
+		return patConsChiFrec;
+	}
+
+	public void setPatConsChiFrec(String patConsChiFrec) {
+		this.patConsChiFrec = patConsChiFrec;
+	}
+
+	@Column(name = "patConsQue", nullable = true, length = 1)
+	public String getPatConsQue() {
+		return patConsQue;
+	}
+
+	public void setPatConsQue(String patConsQue) {
+		this.patConsQue = patConsQue;
+	}
+
+	@Column(name = "patConsQueFrec", nullable = true, length = 1)
+	public String getPatConsQueFrec() {
+		return patConsQueFrec;
+	}
+
+	public void setPatConsQueFrec(String patConsQueFrec) {
+		this.patConsQueFrec = patConsQueFrec;
+	}
+
+	@Column(name = "patConsCafe", nullable = true, length = 1)
+	public String getPatConsCafe() {
+		return patConsCafe;
+	}
+
+	public void setPatConsCafe(String patConsCafe) {
+		this.patConsCafe = patConsCafe;
+	}
+
+	@Column(name = "patConsCafeFrec", nullable = true, length = 1)
+	public String getPatConsCafeFrec() {
+		return patConsCafeFrec;
+	}
+
+	public void setPatConsCafeFrec(String patConsCafeFrec) {
+		this.patConsCafeFrec = patConsCafeFrec;
+	}
+
+	@Column(name = "patConsTor", nullable = true, length = 1)
+	public String getPatConsTor() {
+		return patConsTor;
+	}
+
+	public void setPatConsTor(String patConsTor) {
+		this.patConsTor = patConsTor;
+	}
+
+	@Column(name = "patConsTorFrec", nullable = true, length = 1)
+	public String getPatConsTorFrec() {
+		return patConsTorFrec;
+	}
+
+	public void setPatConsTorFrec(String patConsTorFrec) {
+		this.patConsTorFrec = patConsTorFrec;
+	}
+
+	@Column(name = "patConsCar", nullable = true, length = 1)
+	public String getPatConsCar() {
+		return patConsCar;
+	}
+
+	public void setPatConsCar(String patConsCar) {
+		this.patConsCar = patConsCar;
+	}
+
+	@Column(name = "patConsCarFrec", nullable = true, length = 1)
+	public String getPatConsCarFrec() {
+		return patConsCarFrec;
+	}
+
+	public void setPatConsCarFrec(String patConsCarFrec) {
+		this.patConsCarFrec = patConsCarFrec;
+	}
+
+	@Column(name = "patConsHue", nullable = true, length = 1)
+	public String getPatConsHue() {
+		return patConsHue;
+	}
+
+	public void setPatConsHue(String patConsHue) {
+		this.patConsHue = patConsHue;
+	}
+
+	@Column(name = "patConsHueFrec", nullable = true, length = 1)
+	public String getPatConsHueFrec() {
+		return patConsHueFrec;
+	}
+
+	public void setPatConsHueFrec(String patConsHueFrec) {
+		this.patConsHueFrec = patConsHueFrec;
+	}
+
+	@Column(name = "patConsPan", nullable = true, length = 1)
+	public String getPatConsPan() {
+		return patConsPan;
+	}
+
+	public void setPatConsPan(String patConsPan) {
+		this.patConsPan = patConsPan;
+	}
+
+	@Column(name = "patConsPanFrec", nullable = true, length = 1)
+	public String getPatConsPanFrec() {
+		return patConsPanFrec;
+	}
+
+	public void setPatConsPanFrec(String patConsPanFrec) {
+		this.patConsPanFrec = patConsPanFrec;
+	}
+
+	@Column(name = "patConsBan", nullable = true, length = 1)
+	public String getPatConsBan() {
+		return patConsBan;
+	}
+
+	public void setPatConsBan(String patConsBan) {
+		this.patConsBan = patConsBan;
+	}
+
+	@Column(name = "patConsBanFrec", nullable = true, length = 1)
+	public String getPatConsBanFrec() {
+		return patConsBanFrec;
+	}
+
+	public void setPatConsBanFrec(String patConsBanFrec) {
+		this.patConsBanFrec = patConsBanFrec;
+	}
+
+	@Column(name = "patConsPanDul", nullable = true, length = 1)
+	public String getPatConsPanDul() {
+		return patConsPanDul;
+	}
+
+	public void setPatConsPanDul(String patConsPanDul) {
+		this.patConsPanDul = patConsPanDul;
+	}
+
+	@Column(name = "patConsPanDulFrec", nullable = true, length = 1)
+	public String getPatConsPanDulFrec() {
+		return patConsPanDulFrec;
+	}
+
+	public void setPatConsPanDulFrec(String patConsPanDulFrec) {
+		this.patConsPanDulFrec = patConsPanDulFrec;
+	}
+
+	@Column(name = "patConsPla", nullable = true, length = 1)
+	public String getPatConsPla() {
+		return patConsPla;
+	}
+
+	public void setPatConsPla(String patConsPla) {
+		this.patConsPla = patConsPla;
+	}
+
+	@Column(name = "patConsPlaFrec", nullable = true, length = 1)
+	public String getPatConsPlaFrec() {
+		return patConsPlaFrec;
+	}
+
+	public void setPatConsPlaFrec(String patConsPlaFrec) {
+		this.patConsPlaFrec = patConsPlaFrec;
+	}
+
+	@Column(name = "patConsPapa", nullable = true, length = 1)
+	public String getPatConsPapa() {
+		return patConsPapa;
+	}
+
+	public void setPatConsPapa(String patConsPapa) {
+		this.patConsPapa = patConsPapa;
+	}
+
+	@Column(name = "patConsPapaFrec", nullable = true, length = 1)
+	public String getPatConsPapaFrec() {
+		return patConsPapaFrec;
+	}
+
+	public void setPatConsPapaFrec(String patConsPapaFrec) {
+		this.patConsPapaFrec = patConsPapaFrec;
+	}
+
+	@Column(name = "patConsLec", nullable = true, length = 1)
+	public String getPatConsLec() {
+		return patConsLec;
+	}
+
+	public void setPatConsLec(String patConsLec) {
+		this.patConsLec = patConsLec;
+	}
+
+	@Column(name = "patConsLecFrec", nullable = true, length = 1)
+	public String getPatConsLecFrec() {
+		return patConsLecFrec;
+	}
+
+	public void setPatConsLecFrec(String patConsLecFrec) {
+		this.patConsLecFrec = patConsLecFrec;
+	}
+
+	@Column(name = "patConsSalTom", nullable = true, length = 1)
+	public String getPatConsSalTom() {
+		return patConsSalTom;
+	}
+
+	public void setPatConsSalTom(String patConsSalTom) {
+		this.patConsSalTom = patConsSalTom;
+	}
+
+	@Column(name = "patConsSalTomFrec", nullable = true, length = 1)
+	public String getPatConsSalTomFrec() {
+		return patConsSalTomFrec;
+	}
+
+	public void setPatConsSalTomFrec(String patConsSalTomFrec) {
+		this.patConsSalTomFrec = patConsSalTomFrec;
+	}
+
+	@Column(name = "patConsGas", nullable = true, length = 1)
+	public String getPatConsGas() {
+		return patConsGas;
+	}
+
+	public void setPatConsGas(String patConsGas) {
+		this.patConsGas = patConsGas;
+	}
+
+	@Column(name = "patConsGasFrec", nullable = true, length = 1)
+	public String getPatConsGasFrec() {
+		return patConsGasFrec;
+	}
+
+	public void setPatConsGasFrec(String patConsGasFrec) {
+		this.patConsGasFrec = patConsGasFrec;
+	}
+
+	@Column(name = "patConsCarRes", nullable = true, length = 1)
+	public String getPatConsCarRes() {
+		return patConsCarRes;
+	}
+
+	public void setPatConsCarRes(String patConsCarRes) {
+		this.patConsCarRes = patConsCarRes;
+	}
+
+	@Column(name = "patConsCarResFrec", nullable = true, length = 1)
+	public String getPatConsCarResFrec() {
+		return patConsCarResFrec;
+	}
+
+	public void setPatConsCarResFrec(String patConsCarResFrec) {
+		this.patConsCarResFrec = patConsCarResFrec;
+	}
+
+	@Column(name = "patConsAvena", nullable = true, length = 1)
+	public String getPatConsAvena() {
+		return patConsAvena;
+	}
+
+	public void setPatConsAvena(String patConsAvena) {
+		this.patConsAvena = patConsAvena;
+	}
+
+	@Column(name = "patConsAvenaFrec", nullable = true, length = 1)
+	public String getPatConsAvenaFrec() {
+		return patConsAvenaFrec;
+	}
+
+	public void setPatConsAvenaFrec(String patConsAvenaFrec) {
+		this.patConsAvenaFrec = patConsAvenaFrec;
+	}
+
+	@Column(name = "patConsNaran", nullable = true, length = 1)
+	public String getPatConsNaran() {
+		return patConsNaran;
+	}
+
+	public void setPatConsNaran(String patConsNaran) {
+		this.patConsNaran = patConsNaran;
+	}
+
+	@Column(name = "patConsNaranFrec", nullable = true, length = 1)
+	public String getPatConsNaranFrec() {
+		return patConsNaranFrec;
+	}
+
+	public void setPatConsNaranFrec(String patConsNaranFrec) {
+		this.patConsNaranFrec = patConsNaranFrec;
+	}
+
+	@Column(name = "patConsPasta", nullable = true, length = 1)
+	public String getPatConsPasta() {
+		return patConsPasta;
+	}
+
+	public void setPatConsPasta(String patConsPasta) {
+		this.patConsPasta = patConsPasta;
+	}
+
+	@Column(name = "patConsPastaFrec", nullable = true, length = 1)
+	public String getPatConsPastaFrec() {
+		return patConsPastaFrec;
+	}
+
+	public void setPatConsPastaFrec(String patConsPastaFrec) {
+		this.patConsPastaFrec = patConsPastaFrec;
+	}
+
+	@Column(name = "patConsAyote", nullable = true, length = 1)
+	public String getPatConsAyote() {
+		return patConsAyote;
+	}
+
+	public void setPatConsAyote(String patConsAyote) {
+		this.patConsAyote = patConsAyote;
+	}
+
+	@Column(name = "patConsAyoteFrec", nullable = true, length = 1)
+	public String getPatConsAyoteFrec() {
+		return patConsAyoteFrec;
+	}
+
+	public void setPatConsAyoteFrec(String patConsAyoteFrec) {
+		this.patConsAyoteFrec = patConsAyoteFrec;
+	}
+
+	@Column(name = "patConsMagg", nullable = true, length = 1)
+	public String getPatConsMagg() {
+		return patConsMagg;
+	}
+
+	public void setPatConsMagg(String patConsMagg) {
+		this.patConsMagg = patConsMagg;
+	}
+
+	@Column(name = "patConsMaggFrec", nullable = true, length = 1)
+	public String getPatConsMaggFrec() {
+		return patConsMaggFrec;
+	}
+
+	public void setPatConsMaggFrec(String patConsMaggFrec) {
+		this.patConsMaggFrec = patConsMaggFrec;
+	}
+
+	@Column(name = "patConsFrut", nullable = true, length = 1)
+	public String getPatConsFrut() {
+		return patConsFrut;
+	}
+
+	public void setPatConsFrut(String patConsFrut) {
+		this.patConsFrut = patConsFrut;
+	}
+
+	@Column(name = "patConsFrutFrec", nullable = true, length = 1)
+	public String getPatConsFrutFrec() {
+		return patConsFrutFrec;
+	}
+
+	public void setPatConsFrutFrec(String patConsFrutFrec) {
+		this.patConsFrutFrec = patConsFrutFrec;
+	}
+
+	@Column(name = "patConsRaic", nullable = true, length = 1)
+	public String getPatConsRaic() {
+		return patConsRaic;
+	}
+
+	public void setPatConsRaic(String patConsRaic) {
+		this.patConsRaic = patConsRaic;
+	}
+
+	@Column(name = "patConsRaicFrec", nullable = true, length = 1)
+	public String getPatConsRaicFrec() {
+		return patConsRaicFrec;
+	}
+
+	public void setPatConsRaicFrec(String patConsRaicFrec) {
+		this.patConsRaicFrec = patConsRaicFrec;
+	}
+
+	@Column(name = "patConsMenei", nullable = true, length = 1)
+	public String getPatConsMenei() {
+		return patConsMenei;
+	}
+
+	public void setPatConsMenei(String patConsMenei) {
+		this.patConsMenei = patConsMenei;
+	}
+
+	@Column(name = "patConsMeneiFrec", nullable = true, length = 1)
+	public String getPatConsMeneiFrec() {
+		return patConsMeneiFrec;
+	}
+
+	public void setPatConsMeneiFrec(String patConsMeneiFrec) {
+		this.patConsMeneiFrec = patConsMeneiFrec;
+	}
+
+	@Column(name = "patConsZana", nullable = true, length = 1)
+	public String getPatConsZana() {
+		return patConsZana;
+	}
+
+	public void setPatConsZana(String patConsZana) {
+		this.patConsZana = patConsZana;
+	}
+
+	@Column(name = "patConsZanaFrec", nullable = true, length = 1)
+	public String getPatConsZanaFrec() {
+		return patConsZanaFrec;
+	}
+
+	public void setPatConsZanaFrec(String patConsZanaFrec) {
+		this.patConsZanaFrec = patConsZanaFrec;
+	}
+
+	@Column(name = "patConsPinolillo", nullable = true, length = 1)
+	public String getPatConsPinolillo() {
+		return patConsPinolillo;
+	}
+
+	public void setPatConsPinolillo(String patConsPinolillo) {
+		this.patConsPinolillo = patConsPinolillo;
+	}
+
+	@Column(name = "patConsPinolilloFrec", nullable = true, length = 1)
+	public String getPatConsPinolilloFrec() {
+		return patConsPinolilloFrec;
+	}
+
+	public void setPatConsPinolilloFrec(String patConsPinolilloFrec) {
+		this.patConsPinolilloFrec = patConsPinolilloFrec;
+	}
+
+	@Column(name = "patConsOVerd", nullable = true, length = 1)
+	public String getPatConsOVerd() {
+		return patConsOVerd;
+	}
+
+	public void setPatConsOVerd(String patConsOVerd) {
+		this.patConsOVerd = patConsOVerd;
+	}
+
+	@Column(name = "patConsOVerdFrec", nullable = true, length = 1)
+	public String getPatConsOVerdFrec() {
+		return patConsOVerdFrec;
+	}
+
+	public void setPatConsOVerdFrec(String patConsOVerdFrec) {
+		this.patConsOVerdFrec = patConsOVerdFrec;
+	}
+
+	@Column(name = "patConsPesc", nullable = true, length = 1)
+	public String getPatConsPesc() {
+		return patConsPesc;
+	}
+
+	public void setPatConsPesc(String patConsPesc) {
+		this.patConsPesc = patConsPesc;
+	}
+
+	@Column(name = "patConsPescFrec", nullable = true, length = 1)
+	public String getPatConsPescFrec() {
+		return patConsPescFrec;
+	}
+
+	public void setPatConsPescFrec(String patConsPescFrec) {
+		this.patConsPescFrec = patConsPescFrec;
+	}
+
+	@Column(name = "patConsAlimComp", nullable = true, length = 1)
+	public String getPatConsAlimComp() {
+		return patConsAlimComp;
+	}
+
+	public void setPatConsAlimComp(String patConsAlimComp) {
+		this.patConsAlimComp = patConsAlimComp;
+	}
+
+	@Column(name = "patConsAlimCompFrec", nullable = true, length = 1)
+	public String getPatConsAlimCompFrec() {
+		return patConsAlimCompFrec;
+	}
+
+	public void setPatConsAlimCompFrec(String patConsAlimCompFrec) {
+		this.patConsAlimCompFrec = patConsAlimCompFrec;
+	}
+
+	@Column(name = "patConsLecPol", nullable = true, length = 1)
+	public String getPatConsLecPol() {
+		return patConsLecPol;
+	}
+
+	public void setPatConsLecPol(String patConsLecPol) {
+		this.patConsLecPol = patConsLecPol;
+	}
+
+	@Column(name = "patConsLecPolFrec", nullable = true, length = 1)
+	public String getPatConsLecPolFrec() {
+		return patConsLecPolFrec;
+	}
+
+	public void setPatConsLecPolFrec(String patConsLecPolFrec) {
+		this.patConsLecPolFrec = patConsLecPolFrec;
+	}
+
+	@Column(name = "patConsCarCer", nullable = true, length = 1)
+	public String getPatConsCarCer() {
+		return patConsCarCer;
+	}
+
+	public void setPatConsCarCer(String patConsCarCer) {
+		this.patConsCarCer = patConsCarCer;
+	}
+
+	@Column(name = "patConsCarCerFrec", nullable = true, length = 1)
+	public String getPatConsCarCerFrec() {
+		return patConsCarCerFrec;
+	}
+
+	public void setPatConsCarCerFrec(String patConsCarCerFrec) {
+		this.patConsCarCerFrec = patConsCarCerFrec;
+	}
+
+	@Column(name = "patConsEmb", nullable = true, length = 1)
+	public String getPatConsEmb() {
+		return patConsEmb;
+	}
+
+	public void setPatConsEmb(String patConsEmb) {
+		this.patConsEmb = patConsEmb;
+	}
+
+	@Column(name = "patConsEmbFrec", nullable = true, length = 1)
+	public String getPatConsEmbFrec() {
+		return patConsEmbFrec;
+	}
+
+	public void setPatConsEmbFrec(String patConsEmbFrec) {
+		this.patConsEmbFrec = patConsEmbFrec;
+	}
+
+	@Column(name = "patConsMar", nullable = true, length = 1)
+	public String getPatConsMar() {
+		return patConsMar;
+	}
+
+	public void setPatConsMar(String patConsMar) {
+		this.patConsMar = patConsMar;
+	}
+
+	@Column(name = "patConsMarFrec", nullable = true, length = 1)
+	public String getPatConsMarFrec() {
+		return patConsMarFrec;
+	}
+
+	public void setPatConsMarFrec(String patConsMarFrec) {
+		this.patConsMarFrec = patConsMarFrec;
+	}
+
+	@Column(name = "patConsCarCaza", nullable = true, length = 1)
+	public String getPatConsCarCaza() {
+		return patConsCarCaza;
+	}
+
+	public void setPatConsCarCaza(String patConsCarCaza) {
+		this.patConsCarCaza = patConsCarCaza;
+	}
+
+	@Column(name = "patConsCarCazaFrec", nullable = true, length = 1)
+	public String getPatConsCarCazaFrec() {
+		return patConsCarCazaFrec;
+	}
+
+	public void setPatConsCarCazaFrec(String patConsCarCazaFrec) {
+		this.patConsCarCazaFrec = patConsCarCazaFrec;
 	}
 
 	@Override

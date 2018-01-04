@@ -16,7 +16,7 @@ import ni.gob.minsa.sivin.domain.audit.Auditable;
 import ni.gob.minsa.sivin.users.model.UserSistema;
 
 /**
- * Simple objeto de dominio que representa un segmento para un usuario
+ * Simple objeto de dominio que representa la relación de los segmentos para un usuario
  * 
  * @author William Aviles
  **/
@@ -70,16 +70,16 @@ public class UsuarioSegmento extends BaseMetaData implements Auditable{
 	@ManyToOne
 	@JoinColumn(name="segmento", insertable = false, updatable = false)
 	@ForeignKey(name = "US_SEGMENTOS_FK")
-	public Segmento getSegmento() {
+	public Segmento getSegment() {
 		return segment;
 	}
-	public void setSegmento(Segmento segment) {
+	public void setSegment(Segmento segment) {
 		this.segment = segment;
 	}
 	
 	@Override
 	public String toString(){
-		return usuarioSegmentoId.getSegmento();
+		return segment.getCodigo();
 	}
 	@Override
 	public boolean isFieldAuditable(String fieldname) {

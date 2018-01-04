@@ -66,7 +66,7 @@ public class UsuarioService {
 	
 	/**
 	 * Regresa un Usuario
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return un <code>UserSistema</code>
 	 */
 
@@ -82,7 +82,7 @@ public class UsuarioService {
 	
 	/**
 	 * Verifica Credenciales
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return boolean
 	 */
 
@@ -98,7 +98,7 @@ public class UsuarioService {
 	
 	/**
 	 * Guarda un usuario
-	 * 
+	 * @param user El usuario. 
 	 * 
 	 */
 	public void saveUser(UserSistema user) {
@@ -108,7 +108,7 @@ public class UsuarioService {
 
 	/**
 	 * Regresa los UserAccess
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return una lista de <code>UserAccess</code>
 	 */
 
@@ -139,7 +139,7 @@ public class UsuarioService {
 	
 	/**
 	 * Guarda un rol del usuario
-	 * 
+	 * @param rol El rol a guardar 
 	 * 
 	 */
 	public void saveRoleUser(Authority rol) {
@@ -149,7 +149,7 @@ public class UsuarioService {
 	
 	/**
 	 * Regresa todos los roles de usuarios
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return una lista de <code>Rol</code>(es)
 	 */
 
@@ -165,10 +165,28 @@ public class UsuarioService {
 		return  query.list();
 	}
 	
+	/**
+	 * Regresa todos los roles que no tenga el usuario
+	 * @param username Nombre del usuario. 
+	 * @return una lista de <code>Rol</code>(es)
+	 */
+
+	@SuppressWarnings("unchecked")
+	public List<Rol> getRolesNoTieneUsuario(String username) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM Rol roles " +
+				"where roles.authority not in (select auth.authId.authority from Authority auth where auth.authId.username =:username)");
+		query.setParameter("username",username);
+		// Retrieve all
+		return  query.list();
+	}
+	
 	
 	/**
 	 * Regresa todos los segmentos del usuario
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return una lista de <code>Segmento</code>(s)
 	 */
 
@@ -186,7 +204,8 @@ public class UsuarioService {
 	
 	/**
 	 * Regresa un rol del usuario
-	 * 
+	 * @param username Nombre del usuario.
+	 * @param rol Nombre del usuario.  
 	 * @return un <code>Authority</code>
 	 */
 
@@ -205,7 +224,7 @@ public class UsuarioService {
 	
 	/**
 	 * Regresa todos los roles del usuario
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return una lista de <code>Rol</code>(es)
 	 */
 

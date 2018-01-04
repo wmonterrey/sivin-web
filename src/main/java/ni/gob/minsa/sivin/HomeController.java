@@ -8,7 +8,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+/**
+ * Controlador que provee los mapeos en la pagina Web para:
+ * 
+ * <ul>
+ * <li>Pagina Principal
+ * <li>Pagina de Ingreso
+ * <li>Ingreso Fallido
+ * <li>Pagina de Salida
+ * <li>No autorizado
+ * <li>No encontrado
+ * </ul>
+ * 
+ * @author William Aviles
+ **/
 @Controller
 @RequestMapping("/*")
 public class HomeController {

@@ -9,8 +9,6 @@ import javax.persistence.UniqueConstraint;
 import ni.gob.minsa.sivin.domain.audit.Auditable;
 
 
-
-
 /**
  * Segmento es la clase que representa el segmento censal donde se realiza una encuesta.
  * 

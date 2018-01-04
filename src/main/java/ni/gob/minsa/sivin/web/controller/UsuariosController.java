@@ -3,7 +3,9 @@ package ni.gob.minsa.sivin.web.controller;
 import com.google.gson.Gson;
 
 import ni.gob.minsa.sivin.domain.audit.AuditTrail;
+import ni.gob.minsa.sivin.domain.relationships.UsuarioSegmento;
 import ni.gob.minsa.sivin.service.AuditTrailService;
+import ni.gob.minsa.sivin.service.SegmentoService;
 import ni.gob.minsa.sivin.service.UsuarioService;
 import ni.gob.minsa.sivin.users.model.Authority;
 import ni.gob.minsa.sivin.users.model.UserAccess;
@@ -29,7 +31,7 @@ import java.util.List;
 /**
  * Controlador web de peticiones relacionadas a usuarios
  * 
- * @author William Avil�s
+ * @author William Aviles
  */
 @Controller
 @RequestMapping("/users/*")
@@ -38,6 +40,8 @@ public class UsuariosController {
 	private UsuarioService usuarioService;
 	@Resource(name="auditTrailService")
 	private AuditTrailService auditTrailService;
+	@Resource(name="segmentoService")
+	private SegmentoService segmentoService;
 	
 	
 	@RequestMapping(value="checkcredential", method=RequestMethod.GET)
@@ -57,7 +61,7 @@ public class UsuariosController {
      */
     @RequestMapping("profile")
     public ModelAndView showUser() {
-        ModelAndView mav = new ModelAndView("users/user");
+        ModelAndView mav = new ModelAndView("users/viewForm");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserSistema user = this.usuarioService.getUser(authentication.getName());
         List<UserAccess> accesosUsuario = usuarioService.getUserAccess(authentication.getName());
@@ -67,6 +71,8 @@ public class UsuariosController {
         mav.addObject("bitacora",bitacoraUsuario);
         List<Authority> rolesusuario = this.usuarioService.getRolesUsuarioTodos(authentication.getName());
         mav.addObject("rolesusuario", rolesusuario);
+        List<UsuarioSegmento> segmentosusuario = this.segmentoService.getUsuarioSegmentosTodos(authentication.getName());
+        mav.addObject("segmentosusuario", segmentosusuario);
         return mav;
     }
     
@@ -78,7 +84,7 @@ public class UsuariosController {
      */
     @RequestMapping("editUser")
     public ModelAndView editUser() {
-        ModelAndView mav = new ModelAndView("users/enterForm");
+        ModelAndView mav = new ModelAndView("users/editForm");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserSistema user = this.usuarioService.getUser(authentication.getName());
         mav.addObject("user",user);
@@ -110,7 +116,7 @@ public class UsuariosController {
     
     @RequestMapping(value = "chgpass", method = RequestMethod.GET)
     public String initChangePassForm() {
-	    return "users/chgpass";
+	    return "users/passForm";
     }
     
     @RequestMapping( value="chgPass", method=RequestMethod.POST)

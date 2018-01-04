@@ -15,10 +15,15 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Controlador que provee los mapeos de la aplicacion movil para:
  * 
+ * <ul>
+ * <li>Pedir las encuestas del usuario
+ * <li>Recibir las encuestas desde el movil
+ * </ul>
  * 
- * 
- */
+ * @author William Aviles
+ **/
 @Controller
 @RequestMapping("/movil/*")
 public class EncuestaController {
@@ -30,6 +35,7 @@ public class EncuestaController {
 
     /**
      * Retorna encuestas. Acepta una solicitud GET para JSON
+     * @param username Nombre del usuario.
      * @return encuestas JSON
      */
     @RequestMapping(value = "encuestas/{username}", method = RequestMethod.GET, produces = "application/json")

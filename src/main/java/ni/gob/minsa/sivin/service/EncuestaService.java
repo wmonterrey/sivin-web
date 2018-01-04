@@ -44,7 +44,7 @@ public class EncuestaService {
 	
 	/**
 	 * Regresa todos las encuestas activas del usuario
-	 * 
+	 * @param username Nombre del usuario. 
 	 * @return una lista de <code>Encuesta</code>(s)
 	 */
 
@@ -62,7 +62,7 @@ public class EncuestaService {
 
 	/**
 	 * Guarda una encuesta
-	 * 
+	 * @param encuesta La encuesta a guardar
 	 * 
 	 */
 	public void saveEncuesta(Encuesta encuesta) {

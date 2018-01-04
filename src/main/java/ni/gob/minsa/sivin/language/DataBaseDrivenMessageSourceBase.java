@@ -9,6 +9,11 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.context.support.AbstractMessageSource;
 
+/**
+ * Elemento base para el manejo de mensajes en Spring desde la base de datos
+ * 
+ * @author William Aviles
+ **/
 public abstract class DataBaseDrivenMessageSourceBase extends AbstractMessageSource{
 
     private final Map<String, Map<String, String>> properties = new HashMap<String, Map<String, String>>();

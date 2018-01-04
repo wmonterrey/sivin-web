@@ -19,7 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ni.gob.minsa.sivin.users.model.Authority;
 import ni.gob.minsa.sivin.users.model.UserSistema;
-
+/**
+ * Servicio que provee un usuario a Spring desde la base de datos
+ * 
+ * @author William Aviles
+ **/
 @Service("customUserDetailsService")
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {

@@ -16,7 +16,7 @@ public final class DateUtil {
     * @param strFecha cadena a convertir
     * @param formato formato solicitado
     * @return Fecha
-    * @throws java.text.ParseException
+    * @throws java.text.ParseException texto mal formado
     */
     public static Date StringToDate(String strFecha, String formato) throws ParseException {
         try {
