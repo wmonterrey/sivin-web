@@ -20,4 +20,8 @@
 <spring:url value="/resources/vendors/js/toastr.min.js" var="ToastR" />
 <script src="${ToastR}" type="text/javascript"></script>
 
+<!-- Chart-->
+<spring:url value="/resources/vendors/js/Chart.min.js" var="Chart" />
+<script src="${Chart}" type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->

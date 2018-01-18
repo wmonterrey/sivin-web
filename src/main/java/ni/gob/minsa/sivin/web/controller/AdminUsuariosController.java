@@ -66,7 +66,7 @@ public class AdminUsuariosController {
     @RequestMapping(value = "/newUser/", method = RequestMethod.GET)
 	public String initAddUserForm(Model model) {
     	List<Rol> roles = usuarioService.getRoles();
-    	List<Segmento> segmentos = segmentoService.getSegmentos();
+    	List<Segmento> segmentos = segmentoService.getSegmentosActivos();
 	    model.addAttribute("roles", roles);
 	    model.addAttribute("segmentos", segmentos);
 		return "admin/users/newForm";

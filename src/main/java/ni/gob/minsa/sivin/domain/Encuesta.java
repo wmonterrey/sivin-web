@@ -188,10 +188,13 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private Float tallaNin2;
 	// SECCION G
 	private String msEnt;
+	private String codMsEnt;
 	private Float hbEnt;
 	private String msNin;
+	private String codMsNin;
 	private Float hbNin;
 	private String moEnt;
+	private String codMoEnt;
 	private String pan;
 	private String sal;
 	private String marcaSal;
@@ -256,6 +259,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String patConsRaicFrec;
 	private String patConsMenei;
 	private String patConsMeneiFrec;
+	private String patConsRepollo;
+	private String patConsRepolloFrec;
 	private String patConsZana;
 	private String patConsZanaFrec;
 	private String patConsPinolillo;
@@ -471,7 +476,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.conoceFNac = conoceFNac;
 	}
 
-	@Column(name = "fnacnet", nullable = true)
+	@Column(name = "fnacent", nullable = true)
 	public Date getFnacEnt() {
 		return fnacEnt;
 	}
@@ -552,7 +557,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.entEmb = entEmb;
 	}
 
-	@Column(name = "entdiozuz", nullable = true, length = 1)
+	
+	@Column(name = "entDioluz", nullable = true, length = 1)
 	public String getEntDioluz() {
 		return entDioluz;
 	}
@@ -833,7 +839,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.e6 = e6;
 	}
 
-	@Column(name = "nselect", nullable = true, length = 1)
+	@Column(name = "nselec", nullable = true, length = 1)
 	public String getNselec() {
 		return nselec;
 	}
@@ -1554,6 +1560,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	public void setMsEnt(String msEnt) {
 		this.msEnt = msEnt;
 	}
+	
+	@Column(name = "codMsEnt", nullable = true, length = 50)
+	public String getCodMsEnt() {
+		return codMsEnt;
+	}
+
+	public void setCodMsEnt(String codMsEnt) {
+		this.codMsEnt = codMsEnt;
+	}
 
 	@Column(name = "hbent", nullable = true)
 	public Float getHbEnt() {
@@ -1572,6 +1587,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	public void setMsNin(String msNin) {
 		this.msNin = msNin;
 	}
+	
+	@Column(name = "codMsNin", nullable = true, length = 50)
+	public String getCodMsNin() {
+		return codMsNin;
+	}
+
+	public void setCodMsNin(String codMsNin) {
+		this.codMsNin = codMsNin;
+	}
 
 	@Column(name = "hbnin", nullable = true)
 	public Float getHbNin() {
@@ -1589,6 +1613,15 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	public void setMoEnt(String moEnt) {
 		this.moEnt = moEnt;
+	}
+	
+	@Column(name = "codMoEnt", nullable = true, length = 50)
+	public String getCodMoEnt() {
+		return codMoEnt;
+	}
+
+	public void setCodMoEnt(String codMoEnt) {
+		this.codMoEnt = codMoEnt;
 	}
 
 	@Column(name = "pan", nullable = true, length = 100)
@@ -2156,6 +2189,25 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	public void setPatConsMeneiFrec(String patConsMeneiFrec) {
 		this.patConsMeneiFrec = patConsMeneiFrec;
+	}
+	
+	
+	@Column(name = "patConsRepollo", nullable = true, length = 1)
+	public String getPatConsRepollo() {
+		return patConsRepollo;
+	}
+
+	public void setPatConsRepollo(String patConsRepollo) {
+		this.patConsRepollo = patConsRepollo;
+	}
+
+	@Column(name = "patConsRepolloFrec", nullable = true, length = 1)
+	public String getPatConsRepolloFrec() {
+		return patConsRepolloFrec;
+	}
+
+	public void setPatConsRepolloFrec(String patConsRepolloFrec) {
+		this.patConsRepolloFrec = patConsRepolloFrec;
 	}
 
 	@Column(name = "patConsZana", nullable = true, length = 1)

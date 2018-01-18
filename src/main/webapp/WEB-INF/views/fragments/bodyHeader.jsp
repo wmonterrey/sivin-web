@@ -14,7 +14,7 @@
   	<!-- BEGIN LANGUAGE DROPDOWN -->
   	<li class="nav-item dropdown d-md-down-none pr-4">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <spring:message code="language" />
+          <i class="fa fa-language"></i> <spring:message code="language" />
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <div class="dropdown-header text-center">

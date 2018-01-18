@@ -34,11 +34,58 @@ public class SegmentoService {
 	 * @return una lista de <code>Segmento</code>(s)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Segmento> getSegmentos() {
+	public List<Segmento> getSegmentosActivos() {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
 		Query query = session.createQuery("FROM Segmento seg where seg.pasive ='0' order by seg.region, seg.departamento, seg.municipio, seg.comunidad, seg.codigo");
+		// Retrieve all
+		return  query.list();
+	}
+	
+	
+	/**
+	 * Regresa todos los municipios activos
+	 * 
+	 * @return una lista de <code>String</code>(s)
+	 */	
+	@SuppressWarnings("unchecked")
+	public List<String> getMunicipiosActivos() {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("Select seg.municipio FROM Segmento seg where seg.pasive ='0' group by seg.municipio");
+		// Retrieve all
+		return  query.list();
+	}
+	
+	
+	/**
+	 * Regresa todos los departamentos activos
+	 * 
+	 * @return una lista de <code>String</code>(s)
+	 */	
+	@SuppressWarnings("unchecked")
+	public List<String> getDepartamentosActivos() {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("Select seg.departamento FROM Segmento seg where seg.pasive ='0' group by seg.departamento");
+		// Retrieve all
+		return  query.list();
+	}
+	
+	/**
+	 * Regresa todos los regiones activos
+	 * 
+	 * @return una lista de <code>String</code>(s)
+	 */	
+	@SuppressWarnings("unchecked")
+	public List<String> getRegionesActivos() {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("Select seg.region FROM Segmento seg where seg.pasive ='0' group by seg.region");
 		// Retrieve all
 		return  query.list();
 	}

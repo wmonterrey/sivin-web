@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-<jsp:include page="fragments/headTag.jsp" />
+<jsp:include page="../fragments/headTag.jsp" />
 <!-- Styles required by this views -->
 
 </head>
@@ -38,10 +38,10 @@
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
   <!-- Header -->
-  <jsp:include page="fragments/bodyHeader.jsp" />
+  <jsp:include page="../fragments/bodyHeader.jsp" />
   <div class="app-body">
   	<!-- Navigation -->
-  	<jsp:include page="fragments/sideBar.jsp" />
+  	<jsp:include page="../fragments/sideBar.jsp" />
     <!-- Main content -->
     <main class="main">
 
@@ -61,11 +61,16 @@
 	  <!-- Container -->
       <div class="container-fluid">
         <div class="animated fadeIn">
-			<strong>404</strong>
-			<h3><spring:message code="notfound" /></h3>
-			<p>
-				 <spring:message code="notfoundmessage" />
-			</p>
+			<i class="icon-check"></i>&nbsp;<spring:message code="enc_fin" /><br/><br/>
+			
+			<i class="icon-question"></i>&nbsp;<spring:message code="enc_next" /><br/><br/>
+			
+			<spring:url value="/super/encuestas/" var="buscarEncuesta"/>
+      		<a href="${fn:escapeXml(buscarEncuesta)}" class="btn btn-secondary btn-lg btn-block"><spring:message code="enc_new" /></a>
+      		<br/>
+			<spring:url value="/super/encuestas/{ident}/" var="verEncuesta"><spring:param name="ident" value="${encuesta.ident}" /></spring:url>
+      		<a href="${fn:escapeXml(verEncuesta)}" class="btn btn-secondary btn-lg btn-block"><spring:message code="enc_same" /></a>
+			
         </div>
 
       </div>
@@ -74,10 +79,10 @@
     
   </div>
   <!-- Pie de página -->
-  <jsp:include page="fragments/bodyFooter.jsp" />
+  <jsp:include page="../fragments/bodyFooter.jsp" />
 
   <!-- Bootstrap and necessary plugins -->
-  <jsp:include page="fragments/corePlugins.jsp" />
+  <jsp:include page="../fragments/corePlugins.jsp" />
 
   <!-- GenesisUI main scripts -->
   <spring:url value="/resources/js/app.js" var="App" />

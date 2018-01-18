@@ -90,7 +90,7 @@ public class UserAccess {
 	public void setLogoutDate(Date logoutDate) {
 		this.logoutDate = logoutDate;
 	}
-	@Column(name = "URL_SALIDA", nullable = true, length =100)
+	@Column(name = "URL_SALIDA", nullable = true, length =500)
 	public String getLogoutRefererUrl() {
 		return logoutRefererUrl;
 	}
