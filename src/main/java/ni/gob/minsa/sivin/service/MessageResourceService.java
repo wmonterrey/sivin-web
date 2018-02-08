@@ -47,8 +47,8 @@ public class MessageResourceService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("FROM MessageResource mr where mr.messageKey like :parametro or mr.spanish like :parametro or mr.english like :parametro");
-		query.setParameter("parametro", '%'+parametro+'%');
+		Query query = session.createQuery("FROM MessageResource mr where lower(mr.messageKey) like :parametro or lower(mr.spanish) like :parametro or lower(mr.english) like :parametro");
+		query.setParameter("parametro", '%'+parametro.toLowerCase()+'%');
 		// Retrieve all
 		return  query.list();
 	}
@@ -76,6 +76,28 @@ public class MessageResourceService {
 		return  query.list();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<MessageResource> loadCatalogos(String parametro) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM MessageResource mr where ((lower(mr.messageKey) like :parametro or lower(mr.spanish) like :parametro or lower(mr.english) like :parametro) and mr.isCat ='1')");
+		query.setParameter("parametro", '%'+parametro.toLowerCase()+'%');
+		// Retrieve all
+		return  query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<MessageResource> getCatalogoTodos(String catalogo) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM MessageResource mens where mens.isCat ='0'" +
+				" and mens.catRoot =:catalogo and mens.catKey is not null order by mens.order");
+		query.setParameter("catalogo", catalogo);
+		// Retrieve all
+		return  query.list();
+	}
 	
 	public MessageResource getMensaje(String idMensaje) {
 		// Retrieve session from Hibernate

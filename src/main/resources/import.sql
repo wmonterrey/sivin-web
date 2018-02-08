@@ -61,6 +61,8 @@ INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'supenc'
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'users', 'Usuarios','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'encuestadores', 'Encuestadores','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'supervisores', 'Supervisores','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'translation', 'Traducción','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'seccatalogs', 'Respuestas','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'logout', 'Salir','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'reports', 'Reportes','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'family', 'Hogar','0','0',0);
@@ -208,6 +210,20 @@ INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, 
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('encsexjf', NULL, NULL, NULL, '0', 0, '0', 'Encuestas por sexo jefe de familia');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('usrenc', NULL, NULL, NULL, '0', 0, '0', 'Usuarios con encuestas');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('segenc', NULL, NULL, NULL, '0', 0, '0', 'Segmentos con encuestas');
+
+/*Formularios Relacionado a Traducción */
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'translations', 'Traducción de mensajes','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'messageKey', 'Código mensaje','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'spanish', 'Español','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'english', 'Inglés','0','0',0);
+
+/*Formularios Relacionado a Catalogos */
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'seccatalogsform', 'Gestión de respuestas','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'catKey', 'Valor de la respuesta','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'catRoot', 'Catálogo Padre','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'pasive', 'De baja','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'order', 'Ordenamiento','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'opcionesCatalogo', 'Respuestas en este catálogo','0','0',0);
 
 
 /*Encuesta*/

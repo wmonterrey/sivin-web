@@ -20,6 +20,12 @@
 	                <li class="nav-item">
 	                    <a class="nav-link" href="<spring:url value="/admin/supervisores/" htmlEscape="true "/>"><i class="icon-check"></i><spring:message code="supervisores" /></a>
 	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="<spring:url value="/admin/traduccion/" htmlEscape="true "/>"><i class="fa fa-flag"></i><spring:message code="translation" /></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="<spring:url value="/admin/catalogos/" htmlEscape="true "/>"><i class="fa fa-archive"></i><spring:message code="seccatalogs" /></a>
+	                </li>
 	            </ul>
 	        </li>
 	        </sec:authorize>
