@@ -43,6 +43,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String ident;
 	private String codigo;
 	private Segmento segmento;
+	private String latitud;
+	private String longitud;
 	private Integer numEncuesta;
 	private Date fechaEntrevista;
 	private String jefeFamilia;
@@ -305,8 +307,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.codigo = codigo;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name="segmento", updatable = false)
+	@ManyToOne(optional=false)
+	@JoinColumn(name="segmento")
     @ForeignKey(name = "FK_SEGMENTO_ENCUESTA")
 	public Segmento getSegmento() {
 		return segmento;
@@ -316,9 +318,26 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.segmento = segmento;
 	}
 	
-	
-	@ManyToOne
-	@JoinColumn(name="encuestador", updatable = false)
+	@Column(name = "latitud", nullable = true, length = 50)
+	public String getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+
+	@Column(name = "longitud", nullable = true, length = 50)
+	public String getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+
+	@ManyToOne(optional=true)
+	@JoinColumn(name="encuestador")
     @ForeignKey(name = "FK_ENCUESTADOR_ENCUESTA")
 	public Encuestador getEncuestador() {
 		return encuestador;
@@ -328,8 +347,8 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.encuestador = encuestador;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="supervisor", updatable = false)
+	@ManyToOne(optional=true)
+	@JoinColumn(name="supervisor")
     @ForeignKey(name = "FK_SUPERVISOR_ENCUESTA")
 	public Supervisor getSupervisor() {
 		return supervisor;

@@ -109,7 +109,7 @@
 		                    	<c:forEach items="${supervisores}" var="sup">
 									<c:choose> 
 										<c:when test="${sup.ident eq encuesta.supervisor.ident}">
-											<option selected value=${enc.ident}>${sup.nombre}</option>
+											<option selected value=${sup.ident}>${sup.nombre}</option>
 										</c:when>
 										<c:otherwise>
 											<option value=${sup.ident}>${sup.nombre}</option>
