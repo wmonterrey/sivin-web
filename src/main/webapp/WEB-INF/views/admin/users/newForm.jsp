@@ -125,7 +125,7 @@
 		                    <label><spring:message code="usersegments" /></label>
 		                    <select id="segmentos" name="segmentos" class="form-control select2-multiple" multiple="">
 		                      <c:forEach items="${segmentos}" var="segmento">
-		                      	<option value="${segmento.ident}">${segmento.codigo}-${segmento.comunidad}-${segmento.municipio}-${segmento.departamento}-${segmento.region}</option>
+		                      	<option value="${segmento.ident}">${segmento.codigo}-${segmento.municipio}-${segmento.departamento}-${segmento.region}</option>
 		                      </c:forEach>
 		                    </select>
 		                 </fieldset>

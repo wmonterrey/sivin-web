@@ -436,7 +436,7 @@ public class AdminUsuariosController {
     		this.segmentoService.saveUsuarioSegmento(segmentoUser);
     		redirecTo = "redirect:/admin/users/{username}/";
     		redirectAttributes.addFlashAttribute("segmentoAgregado", true);
-    		redirectAttributes.addFlashAttribute("nombreSegmento", segment.getCodigo()+"-"+segment.getComunidad());
+    		redirectAttributes.addFlashAttribute("nombreSegmento", segment.getCodigo());
     	}
     	else{
     		redirecTo = "403";

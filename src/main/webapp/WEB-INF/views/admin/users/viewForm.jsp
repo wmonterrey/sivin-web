@@ -410,7 +410,7 @@
 		                               <spring:param name="username" value="${segmentousuario.usuarioSegmentoId.usuario}" />
 		                               <spring:param name="segmento" value="${segmentousuario.usuarioSegmentoId.segmento}" />
 		                            </spring:url>
-									<td><c:out value="${segmentousuario.segment.comunidad}" /> - <c:out value="${segmentousuario.segment.codigo}" /></td>
+									<td><c:out value="${segmentousuario.segment.codigo}" /></td>
 									<c:choose>
 										<c:when test="${segmentousuario.pasive=='0'.charAt(0)}">
 											<td><span class="badge badge-success"><spring:message code="CAT_SINO_SI" /></span></td>
@@ -581,7 +581,7 @@
 		                    <label><spring:message code="usersegments" /></label>
 		                    <select id="segmentos" name="segmentos" class="form-control select2-single">
 		                      <c:forEach items="${segmentos}" var="segmento">
-		                      	<option value="${segmento.ident}">${segmento.codigo}-${segmento.comunidad}-${segmento.municipio}-${segmento.departamento}-${segmento.region}</option>
+		                      	<option value="${segmento.ident}">${segmento.codigo}-${segmento.municipio}-${segmento.departamento}-${segmento.region}</option>
 		                      </c:forEach>
 		                    </select>
 					</div>

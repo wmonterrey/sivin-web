@@ -151,7 +151,7 @@ return {
     				var html;
     				var len = data.length;
     				for ( var i = 0; i < len; i++) {
-    					html += '<option value="' + data[i].ident + '">'+ data[i].codigo + ' - '+  data[i].comunidad +'</option>';
+    					html += '<option value="' + data[i].ident + '">'+ data[i].codigo +'</option>';
     				}
     				$('#zonafiltrar').html(html);
     			});

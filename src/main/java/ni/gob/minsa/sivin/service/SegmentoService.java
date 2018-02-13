@@ -38,7 +38,7 @@ public class SegmentoService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("FROM Segmento seg where seg.pasive ='0' order by seg.region, seg.departamento, seg.municipio, seg.comunidad, seg.codigo");
+		Query query = session.createQuery("FROM Segmento seg where seg.pasive ='0' order by seg.codigo");
 		// Retrieve all
 		return  query.list();
 	}

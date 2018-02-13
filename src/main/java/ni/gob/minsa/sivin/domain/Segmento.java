@@ -75,7 +75,7 @@ public class Segmento extends BaseMetaData implements Auditable{
 		this.ident = ident;
 	}
 
-	@Column(name = "codigo", nullable = false, length = 5)
+	@Column(name = "codigo", nullable = false, length = 105)
 	public String getCodigo() {
 		return codigo;
 	}
