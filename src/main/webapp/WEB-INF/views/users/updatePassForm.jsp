@@ -5,8 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-<jsp:include page="../../fragments/headTag.jsp" />
+<jsp:include page="../fragments/headTag.jsp" />
 <!-- Styles required by this views -->
+<spring:url value="/resources/vendors/css/select2.min.css" var="select2css" />
+<link href="${select2css}" rel="stylesheet" type="text/css"/>
 </head>
 <!-- BODY options, add following classes to body to change options
 
@@ -36,29 +38,12 @@
 
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-  <!-- Header -->
-  <jsp:include page="../../fragments/bodyHeader.jsp" />
   <div class="app-body">
-  	<!-- Navigation -->
-  	<jsp:include page="../../fragments/sideBar.jsp" />
     <!-- Main content -->
     <main class="main">
-	  <spring:url value="/admin/encuestadores/saveEncuestador/" var="saveEncuestadorUrl"></spring:url>
-  	  <spring:url value="/admin/encuestadores/" var="encuestadorUrl"/>	
-      <!-- Breadcrumb -->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home" /></a></li>
-        <li class="breadcrumb-item"><a href="<spring:url value="/admin/encuestadores/" htmlEscape="true "/>"><spring:message code="encuestadores" /></a></li>
-        <li class="breadcrumb-item active"><c:out value="${encuestador.codigo}" /></li>
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-menu d-md-down-none">
-          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="#"><i class="icon-speech"></i></a>
-            <a class="btn" href="<spring:url value="/" htmlEscape="true "/>"><i class="icon-graph"></i> &nbsp;<spring:message code="dashboard" /></a>
-            <a class="btn" href="<spring:url value="/logout" htmlEscape="true" />"><i class="icon-logout"></i> &nbsp;<spring:message code="logout" /></a>
-          </div>
-        </li>
-      </ol>
+	  <spring:url value="/users/chgPass" var="saveUserUrl"></spring:url>
+  	  <spring:url value="/logout" var="usuarioUrl"/>		
+      
 	  <!-- Container -->
       <div class="container-fluid">
 
@@ -67,7 +52,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <i class="icon-note"></i> <spring:message code="edit" /> <spring:message code="encuestadores" />
+                  <i class="icon-key"></i> <spring:message code="changepass" />
                   <div class="card-actions">
                     
                   </div>
@@ -77,28 +62,22 @@
                   <div class="row">
 
                     <div class="col-md-8">
-                      <form action="#" autocomplete="off" id="add-encuestador-form">                      
+                      <form action="#" autocomplete="off" id="add-user-form">                      
 						<div class="form-group">
 	                      <div class="input-group">
-	                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-	                        <input type="text" id="ident" name="ident" readonly value="${encuestador.ident}" class="form-control" placeholder="<spring:message code="ident" />">
+	                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+	                        <input type="password" autocomplete="new-password" id="password" name="password" class="form-control" placeholder="<spring:message code="login.password" />">
 	                      </div>
-	                    </div>	
+	                    </div> 
 	                    <div class="form-group">
 	                      <div class="input-group">
-	                        <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-	                        <input type="text" id="codigo" name="codigo" value="${encuestador.codigo}" class="form-control" placeholder="<spring:message code="codigo" />">
-	                      </div>
-	                    </div>  
-                        <div class="form-group">
-	                      <div class="input-group">
-	                        <span class="input-group-addon"><i class="fa fa-address-book"></i></span>
-	                        <input type="text" id="nombre" name="nombre" value="${encuestador.nombre}" class="form-control" placeholder="<spring:message code="nombre" />">
+	                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+	                        <input type="password" autocomplete="new-password" id="confirm_password" name="confirm_password" class="form-control" placeholder="<spring:message code="password.repeat" />">
 	                      </div>
 	                    </div>
+                        
                         <div class="form-group">
                           <button type="submit" class="btn btn-primary" id="guardar"><i class="fa fa-save"></i>&nbsp;<spring:message code="save" /></button>
-						  <a href="${fn:escapeXml(encuestadorUrl)}" class="btn btn-danger"><i class="fa fa-undo"></i>&nbsp;<spring:message code="cancel" /></a>
                         </div>
                       </form>
                     </div>
@@ -117,11 +96,10 @@
     
   </div>
   <!-- Pie de p�gina -->
-  <jsp:include page="../../fragments/bodyFooter.jsp" />
+  <jsp:include page="../fragments/bodyFooter.jsp" />
 
   <!-- Bootstrap and necessary plugins -->
-  <jsp:include page="../../fragments/corePlugins.jsp" />
-  <jsp:include page="../../fragments/bodyUtils.jsp" />
+  <jsp:include page="../fragments/corePlugins.jsp" />
 
   <!-- GenesisUI main scripts -->
   <spring:url value="/resources/js/app.js" var="App" />
@@ -144,11 +122,13 @@
       <spring:param name="language" value="${lenguaje}" />
   </spring:url>
   <script src="${jQValidationLoc}"></script>
+  <spring:url value="/resources/vendors/js/select2.min.js" var="Select2" />
+  <script src="${Select2}" type="text/javascript"></script>
   
 
   <!-- Custom scripts required by this view -->
-  <spring:url value="/resources/js/views/Encuestador.js" var="processEncuestador" />
-  <script src="${processEncuestador}"></script>
+  <spring:url value="/resources/js/views/chgPassUser.js" var="processUser" />
+  <script src="${processUser}"></script>
   
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
@@ -156,11 +136,11 @@
 
 <script>
 	jQuery(document).ready(function() {
-		var parametros = {saveEncuestadorUrl: "${saveEncuestadorUrl}", successmessage: "${successmessage}",
+		var parametros = {saveUserUrl: "${saveUserUrl}", successmessage: "${successmessage}",
 				errormessage: "${errormessage}",waitmessage: "${waitmessage}",
-				encuestadorUrl: "${encuestadorUrl}" 
+				usuarioUrl: "${usuarioUrl}" 
 		};
-		ProcessEncuestador.init(parametros);
+		ProcessUser.init(parametros);
 	});
 </script>
   

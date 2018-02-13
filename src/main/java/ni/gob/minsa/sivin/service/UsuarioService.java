@@ -1,5 +1,7 @@
 package ni.gob.minsa.sivin.service;
 
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,14 +9,19 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ni.gob.minsa.sivin.domain.Segmento;
 import ni.gob.minsa.sivin.users.model.Authority;
+import ni.gob.minsa.sivin.users.model.PasswordResetToken;
 import ni.gob.minsa.sivin.users.model.Rol;
 import ni.gob.minsa.sivin.users.model.UserAccess;
 import ni.gob.minsa.sivin.users.model.UserSistema;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 /**
  * Servicio para el objeto UserSistema
@@ -81,6 +88,52 @@ public class UsuarioService {
 	}
 	
 	/**
+	 * Regresa un Usuario
+	 * @param username Nombre del usuario. 
+	 * @param email Email del usuario. 
+	 * @return un <code>UserSistema</code>
+	 */
+
+	public UserSistema getUser(String username,String email) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM UserSistema u where " +
+				"u.username =:username and u.email =:email and u.enabled is true");
+		query.setParameter("username",username);
+		query.setParameter("email",email);
+		UserSistema user = (UserSistema) query.uniqueResult();
+		return user;
+	}
+	
+	
+	public String validatePasswordResetToken(String id, String token) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM PasswordResetToken token where " +
+				"token.token =:token");
+		query.setParameter("token",token);
+	    PasswordResetToken passToken = (PasswordResetToken) query.uniqueResult();
+	    if ((passToken == null) || !(passToken.getUser()
+	        .getUsername().equals(id))) {
+	        return "invalidToken";
+	    }
+	 
+	    Calendar cal = Calendar.getInstance();
+	    if ((passToken.getExpiryDate()
+	        .getTime() - cal.getTime()
+	        .getTime()) <= 0) {
+	        return "expired";
+	    }
+	 
+	    UserSistema userSistema = passToken.getUser();
+	    
+	    Authentication auth = new UsernamePasswordAuthenticationToken(
+	    		userSistema, null, Arrays.asList(
+	      new SimpleGrantedAuthority("ROLE_CAMBIO_CONTRASENA")));
+	    SecurityContextHolder.getContext().setAuthentication(auth);
+	    return null;
+	}
+	
+	/**
 	 * Verifica Credenciales
 	 * @param username Nombre del usuario. 
 	 * @return boolean
@@ -97,6 +150,22 @@ public class UsuarioService {
 	}
 	
 	/**
+	 * Verifica si tiene que cambiar contraseña
+	 * @param username Nombre del usuario. 
+	 * @return boolean
+	 */
+
+	public Boolean checkChangeCredential(String username) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM UserSistema u where " +
+				"u.username =:username");
+		query.setParameter("username",username);
+		UserSistema user = (UserSistema) query.uniqueResult();
+		return user.getChangePasswordNextLogin();
+	}
+	
+	/**
 	 * Guarda un usuario
 	 * @param user El usuario. 
 	 * 
@@ -104,6 +173,13 @@ public class UsuarioService {
 	public void saveUser(UserSistema user) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(user);
+	}
+	
+	
+	public void createPasswordResetTokenForUser(UserSistema user, String token) {
+	    PasswordResetToken myToken = new PasswordResetToken(token, user);
+	    Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(myToken);
 	}
 
 	/**

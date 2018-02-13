@@ -81,6 +81,9 @@
 		</spring:url>
 		<spring:url value="/admin/users/lockunl/unlock2/{username}/" var="unlockUrl">
 			<spring:param name="username" value="${user.username}" />
+		</spring:url>
+		<spring:url value="/admin/users/enablepass/{username}/" var="enablePassUrl">
+			<spring:param name="username" value="${user.username}" />
 		</spring:url>	
       <!-- Breadcrumb -->
       <ol class="breadcrumb">
@@ -125,6 +128,14 @@
 									</c:when>
 									<c:otherwise>
 										<a class="dropdown-item unlock" data-toggle="modal" data-whatever="${fn:escapeXml(unlockUrl)}"><i class="fa fa-unlock"></i> <spring:message code="unlock" /></a>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${user.credentialsNonExpired}">
+										
+									</c:when>
+									<c:otherwise>
+										<a class="dropdown-item unlock" data-toggle="modal" data-whatever="${fn:escapeXml(enablePassUrl)}"><i class="fa fa-unlock"></i> <spring:message code="unlock" /> <spring:message code="usercred" /></a>
 									</c:otherwise>
 								</c:choose>
 						    </div>
@@ -592,6 +603,7 @@
 
   <!-- Bootstrap and necessary plugins -->
   <jsp:include page="../../fragments/corePlugins.jsp" />
+  <jsp:include page="../../fragments/bodyUtils.jsp" />
 
   <!-- GenesisUI main scripts -->
   <spring:url value="/resources/js/app.js" var="App" />
@@ -697,6 +709,12 @@
 	}
 	if ("${segmentoAgregado}"){
 		toastr.info("${segmentoAddedLabel}", "${nombreSegmento}" , {
+		    closeButton: true,
+		    progressBar: true,
+		  });
+	}
+	if ("${passNoVencido}"){
+		toastr.info("${userUnlockedLabel}", "${nombreUsuario}" , {
 		    closeButton: true,
 		    progressBar: true,
 		  });

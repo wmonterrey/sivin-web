@@ -49,10 +49,16 @@ public class UsuariosController {
 	    return this.usuarioService.checkCredential(userName);
 	}
 	
+	@RequestMapping(value="checkForcedChangePass", method=RequestMethod.GET)
+	public @ResponseBody boolean getChangeCredential(@RequestParam String userName) {
+	    return this.usuarioService.checkChangeCredential(userName);
+	}
+	
 	@RequestMapping(value = "forcechgpass", method = RequestMethod.GET)
     public String initForceChangePassForm() {
 	    return "forceChgPass";
     }
+	
 	
 	/**
      * Custom handler for displaying a user.
@@ -119,6 +125,11 @@ public class UsuariosController {
 	    return "users/passForm";
     }
     
+    @RequestMapping(value = "resetpass", method = RequestMethod.GET)
+    public String initChangeResetPassForm() {
+	    return "users/updatePassForm";
+    }
+    
     @RequestMapping( value="chgPass", method=RequestMethod.POST)
 	public ResponseEntity<String> processChangePassForm( @RequestParam( value="password", required=true ) String password
 	        )
@@ -133,6 +144,7 @@ public class UsuariosController {
 		user.setPassword(encodedPass);
 		user.setLastCredentialChange(new Date());
 		user.setCredentialsNonExpired(true);
+		user.setChangePasswordNextLogin(false);
 		this.usuarioService.saveUser(user);
 		return createJsonResponse(user);
     	}

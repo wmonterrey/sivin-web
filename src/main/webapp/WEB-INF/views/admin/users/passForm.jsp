@@ -71,7 +71,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <i class="icon-key"></i> <spring:message code="chgpass" />
+                  <i class="icon-key"></i> <spring:message code="changepass" />
                   <div class="card-actions">
                     
                   </div>
@@ -100,7 +100,13 @@
 	                        <input type="password" autocomplete="new-password" id="confirm_password" name="confirm_password" class="form-control" placeholder="<spring:message code="password.repeat" />">
 	                      </div>
 	                    </div>
-                        
+	                    <div class="form-group">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" id="checkChgPass" name="checkChgPass" value="checkChgPass"> <spring:message code="ask.chgpass" />
+                            </label>
+                          </div>
+                        </div>
                         <div class="form-group">
                           <button type="submit" class="btn btn-primary" id="guardar"><i class="fa fa-save"></i>&nbsp;<spring:message code="save" /></button>
 						  <a href="${fn:escapeXml(usuarioUrl)}" class="btn btn-danger"><i class="fa fa-undo"></i>&nbsp;<spring:message code="cancel" /></a>
@@ -159,6 +165,7 @@
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
 <c:set var="waitmessage"><spring:message code="process.wait" /></c:set>
+
 
 <script>
 	jQuery(document).ready(function() {

@@ -2,18 +2,13 @@ INSERT INTO roles (ROL) VALUES ('ROLE_SUPER');
 INSERT INTO roles (ROL) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (ROL) VALUES ('ROLE_MOVIL');
 INSERT INTO roles (ROL) VALUES ('ROLE_WEB');
-INSERT INTO usuarios_sistema (NOMBRE_USUARIO, CUENTA_SINEXPIRAR, CUENTA_SINBLOQUEAR, DESCRIPCION, FECHA_REGISTRO, USUARIO_REGISTRO, CREDENCIAL_SINEXPIRAR, CORREO_ELECTRONICO, HABILITADO, FECHA_ULTACC, FECHA_ULTMODCRED, FECHA_ULTMOD, USUARIO_ULTMOD, CONTRASENA) VALUES ('admin', '1', '1', 'Administrador', '01-JAN-18', 'admin', '1', 'admincndr@minsa.gob.ni', '1', '01-JAN-18', NULL, '01-JAN-18', 'admin', '6c36dc262b0e44be5811c2296669fc65643aec9dcaa4a76501e0a9508b633fd01ee59a207f8c6d68');
+INSERT INTO roles (ROL) VALUES ('ROLE_CAMBIO_CONTRASENA');
+INSERT INTO usuarios_sistema (CAMBIAR_CONTRASENA_ALLOGIN,NOMBRE_USUARIO, CUENTA_SINEXPIRAR, CUENTA_SINBLOQUEAR, DESCRIPCION, FECHA_REGISTRO, USUARIO_REGISTRO, CREDENCIAL_SINEXPIRAR, CORREO_ELECTRONICO, HABILITADO, FECHA_ULTACC, FECHA_ULTMODCRED, FECHA_ULTMOD, USUARIO_ULTMOD, CONTRASENA) VALUES ('0','admin', '1', '1', 'Administrador', '01-JAN-18', 'admin', '1', 'waviles@icsnicaragua.org', '1', '01-JAN-18', NULL, '01-JAN-18', 'admin', '6c36dc262b0e44be5811c2296669fc65643aec9dcaa4a76501e0a9508b633fd01ee59a207f8c6d68');
 INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_SUPER', 'admin', '0', '0', '01-JAN-18', 'admin');
 INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_ADMIN', 'admin', '0', '0', '01-JAN-18', 'admin');
 INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_MOVIL', 'admin', '0', '0', '01-JAN-18', 'admin');
 INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_WEB', 'admin', '0', '0', '01-JAN-18', 'admin');
-
-INSERT INTO usuarios_sistema (NOMBRE_USUARIO, CUENTA_SINEXPIRAR, CUENTA_SINBLOQUEAR, DESCRIPCION, FECHA_REGISTRO, USUARIO_REGISTRO, CREDENCIAL_SINEXPIRAR, CORREO_ELECTRONICO, HABILITADO, FECHA_ULTACC, FECHA_ULTMODCRED, FECHA_ULTMOD, USUARIO_ULTMOD, CONTRASENA) VALUES ('tab91', '1', '1', 'Administrador', '01-JAN-18', 'admin', '1', 'admincndr@minsa.gob.ni', '1', '01-JAN-18', NULL, '01-JAN-18', 'admin', '6c36dc262b0e44be5811c2296669fc65643aec9dcaa4a76501e0a9508b633fd01ee59a207f8c6d68');
-INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_MOVIL', 'tab91', '0', '0', '01-JAN-18', 'admin');
-
-INSERT INTO usuarios_sistema (NOMBRE_USUARIO, CUENTA_SINEXPIRAR, CUENTA_SINBLOQUEAR, DESCRIPCION, FECHA_REGISTRO, USUARIO_REGISTRO, CREDENCIAL_SINEXPIRAR, CORREO_ELECTRONICO, HABILITADO, FECHA_ULTACC, FECHA_ULTMODCRED, FECHA_ULTMOD, USUARIO_ULTMOD, CONTRASENA) VALUES ('tab92', '1', '1', 'Administrador', '01-JAN-18', 'admin', '1', 'admincndr@minsa.gob.ni', '1', '01-JAN-18', NULL, '01-JAN-18', 'admin', '6c36dc262b0e44be5811c2296669fc65643aec9dcaa4a76501e0a9508b633fd01ee59a207f8c6d68');
-INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_MOVIL', 'tab92', '0', '0', '01-JAN-18', 'admin');
-
+INSERT INTO usuarios_roles (ROL, NOMBRE_USUARIO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO) VALUES ('ROLE_CAMBIO_CONTRASENA', 'admin', '0', '0', '01-JAN-18', 'admin');
 
 INSERT INTO sivin.segmentos (identificador, IDENTIFICADOR_EQUIPO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO, codigo, comunidad, departamento, municipio, procedencia, region) VALUES ('00000000-0586-034f-0000-00001a5efa25', 'server', '1', '0', '01-JAN-18', 'admin', '1', 'Jesus Lopez/Julio Lopez', 'Esteli', 'San Nicolas', 'R', 'Resto del país');
 INSERT INTO sivin.segmentos (identificador, IDENTIFICADOR_EQUIPO, ESTADO, PASIVO, FECHA_REGISTRO, USUARIO_REGISTRO, codigo, comunidad, departamento, municipio, procedencia, region) VALUES ('00000000-0586-034f-0000-00001a5efa26', 'server', '1', '0', '01-JAN-18', 'admin', '2', 'Alcides Meza', 'Esteli', 'Condega', 'R', 'Resto del país');
@@ -50,6 +45,21 @@ INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'login.p
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'login.forgot.password', 'Olvidó contraseña?','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'login.userEnabled', 'Usuario esta activo!','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'login.userDisabled', 'Usuario esta inactivo!','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ask.chgpass', 'Exigir cambio de contraseña','0','0',0);
+
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'seconds', 'segundos','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'session.expiring', 'Su sesión está a punto de expirar!','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'session.expiring.confirm', 'Quiere continuar con su sesión?','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'session.expiring.time', 'Su sesión se cerrará en','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'session.keep', 'Mantener sesión','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'not', 'Notificación','0','0',0);
+
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'resetPassword', 'Enviar nueva contraseña por correo','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'backLogin', 'Regresar a página de ingreso','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'invalidToken', 'El token es inválido','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'expiredToken', 'El token ha expirado','0','0',0);
+
+
 
 
 /*Menu*/
@@ -86,12 +96,19 @@ INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'rolEnab
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'rolDisabled', 'Rol esta inactivo!','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'rolAdded', 'Rol agregado!','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'rolAll', 'Todos los roles ya están agregados!','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.users.model.UserSistema', 'Usuario','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.users.model.Authority', 'Rol de Usuario','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.domain.relationships.UsuarioSegmento', 'Segmento del Usuario','0','0',0);
+
+
 
 /*Encuestadores/Supervisores*/
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ident', 'Identificador único','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'codigo', 'Código asignado','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'nombreEnc', 'Nombre del encuestador','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'nombreSup', 'Nombre del supervisor','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.domain.Encuestador', 'Encuestador','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.domain.Supervisor', 'Supervisor','0','0',0);
 
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'encuestadorEnabled', 'Encuestador esta activo!','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'encuestadorDisabled', 'Encuestador esta inactivo!','0','0',0);
@@ -128,6 +145,7 @@ INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ROLE_AD
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ROLE_SUPER', 'Supervisor','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ROLE_WEB', 'Usuario web','0','0',0);
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ROLE_MOVIL', 'Usuario movil','0','0',0);
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'ROLE_CAMBIO_CONTRASENA', 'Cambio de contraseña','0','0',0);
 
 /*Metadata*/
 INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'createdBy', 'Creado por','0','0',0);
@@ -227,6 +245,7 @@ INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'opcione
 
 
 /*Encuesta*/
+INSERT INTO mensajes (messageKey, es, catPasive, isCat, orden) VALUES ( 'class ni.gob.minsa.sivin.domain.Encuesta', 'Encuesta','0','0',0);
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('encuesta', NULL, NULL, NULL, '0', 0, '0', 'Identificación de la encuesta');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('enc_sec', NULL, NULL, NULL, '0', 0, '0', 'Secciones de la encuesta');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('enc_home', NULL, NULL, NULL, '0', 0, '0', 'Información del hogar');

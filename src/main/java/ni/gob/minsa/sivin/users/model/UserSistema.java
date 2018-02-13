@@ -38,6 +38,7 @@ public class UserSistema implements Auditable {
 	private Boolean credentialsNonExpired=true;
 	private Date lastCredentialChange;
 	private Boolean accountNonLocked=true;
+	private Boolean changePasswordNextLogin=false;
 	private String createdBy;
 	private String modifiedBy;
 	
@@ -137,6 +138,13 @@ public class UserSistema implements Auditable {
 	}
 	public void setAccountNonLocked(Boolean accountNonLocked) {
 		this.accountNonLocked = accountNonLocked;
+	}
+	@Column(name = "CAMBIAR_CONTRASENA_ALLOGIN", nullable = false)
+	public Boolean getChangePasswordNextLogin() {
+		return changePasswordNextLogin;
+	}
+	public void setChangePasswordNextLogin(Boolean changePasswordNextLogin) {
+		this.changePasswordNextLogin = changePasswordNextLogin;
 	}
 	@Column(name = "USUARIO_REGISTRO", nullable = false, length =50)
 	public String getCreatedBy() {

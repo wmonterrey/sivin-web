@@ -58,7 +58,7 @@
 	                    <button type="submit" class="btn btn-primary px-2"><spring:message code="login"/></button>
 	                </div>
 	                <div class="col-6 text-right">
-	                    <a href="<spring:url value="/" htmlEscape="true "/>" class="btn btn-link px-0 actEng"><spring:message code="login.forgot.password"/></a>
+	                    <a href="<spring:url value="/resetPassword" htmlEscape="true "/>" class="btn btn-link px-0"><spring:message code="login.forgot.password"/></a>
 	                </div>
 	            </div>
 	            <div class="row">
@@ -101,7 +101,8 @@
 		<c:set var="lenguaje" value="${cookie.eSivinLang.value}"/>
 	</c:otherwise>
   </c:choose>
-
+  <c:set var="errorMensaje"><spring:message code="${errorMensaje}" /></c:set>  
+  <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
   <script>
 	$(".actEng").click(function(){ 
 		var d = new Date();
@@ -119,7 +120,12 @@
 		location.reload();
         });
 	
-	
+	if ("${errorResetPassword}"){
+		toastr.error("${errorMensaje}", "${errormessage}" , {
+		    closeButton: true,
+		    progressBar: true,
+		  });
+	}
   </script>
 </body>
 </html>

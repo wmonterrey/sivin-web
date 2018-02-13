@@ -24,12 +24,16 @@ SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler{
       (HttpServletRequest request, HttpServletResponse response, Authentication authentication) 
       throws IOException, ServletException {
 		String refererUrl = request.getHeader("Referer");
+		String idSesion ="";
+		String direccionIp="";
 		logger.info(refererUrl);
 		if (authentication!=null){
 			WebAuthenticationDetails wad  = (WebAuthenticationDetails) authentication.getDetails();
 			String username = authentication.getName();
-        	String idSesion = wad.getSessionId();
-        	String direccionIp = wad.getRemoteAddress();
+			if(wad!=null) {
+				idSesion = wad.getSessionId();
+				direccionIp = wad.getRemoteAddress();
+			}
 			userDetailsDao.updateAccessUrl(username, idSesion, direccionIp, refererUrl);
 			super.onLogoutSuccess(request, response, authentication);
 		}

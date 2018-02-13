@@ -147,7 +147,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 		DateTime fecUltCambio = new DateTime(user.getLastCredentialChange());
     	DateTime fecHoy = new DateTime();
     	Days diff = Days.daysBetween(fecUltCambio, fecHoy);
-		if (diff.getDays() >= 120){
+		if (diff.getDays() >= 180){
 			query = session.createQuery("update UserSistema set credentialsNonExpired = :nobloqueado" +
 					" where username = :username");
 			query.setParameter("nobloqueado", false);

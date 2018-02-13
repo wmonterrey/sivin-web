@@ -24,4 +24,9 @@
 <spring:url value="/resources/vendors/js/Chart.min.js" var="Chart" />
 <script src="${Chart}" type="text/javascript"></script>
 
+<!-- jQuery Idle Time Out-->
+<spring:url value="/resources/vendors/js/jquery.idletimeout.js" var="idleTimeout" />
+<script src="${idleTimeout}" type="text/javascript"></script>
+<spring:url value="/resources/vendors/js/jquery.idletimer.js" var="idleTimer" />
+<script src="${idleTimer}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->

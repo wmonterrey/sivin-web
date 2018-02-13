@@ -517,6 +517,7 @@ public class AdminUsuariosController {
     @RequestMapping( value="/chgPass/", method=RequestMethod.POST)
 	public ResponseEntity<String> processChangePassForm( @RequestParam(value="username", required=true ) String userName
 			, @RequestParam( value="password", required=true ) String password
+			, @RequestParam( value="checkChgPass", required=false, defaultValue="") String checkChgPass
 	        )
 	{
     	UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -528,6 +529,13 @@ public class AdminUsuariosController {
 			String encodedPass = encoder.encode(password);
 			user.setPassword(encodedPass);
 			user.setLastCredentialChange(new Date());
+			user.setCredentialsNonExpired(true);
+			if(checkChgPass.equals("checkChgPass")) {
+				user.setChangePasswordNextLogin(true);
+			}
+			else {
+				user.setChangePasswordNextLogin(false);
+			}
 			this.usuarioService.saveUser(user);
 			return createJsonResponse(user);
     	}
@@ -537,6 +545,36 @@ public class AdminUsuariosController {
     		return new ResponseEntity<String>( json, HttpStatus.CREATED);
     	}
 	}
+    
+    
+    /**
+     * Custom handler for enabling an outdated password.
+     *
+     * @param username the ID of the user to unlock password
+     * @param redirectAttributes Regresa nombre de usuario
+     * @return a String
+     */
+    @RequestMapping("/enablepass/{username}/")
+    public String unlockPass(@PathVariable("username") String username, 
+    		RedirectAttributes redirectAttributes) {
+    	String redirecTo="404";
+    	UserSistema usuarioActual = this.usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+		UserSistema user = this.usuarioService.getUser(username);
+    	if(user!=null){
+    		user.setModified(new Date());
+    		user.setModifiedBy(usuarioActual.getUsername());
+    		user.setCredentialsNonExpired(true);
+    		user.setLastCredentialChange(new Date());
+    		this.usuarioService.saveUser(user);
+    		redirecTo = "redirect:/admin/users/{username}/";
+    		redirectAttributes.addFlashAttribute("passNoVencido", true);
+    		redirectAttributes.addFlashAttribute("nombreUsuario", username);
+    	}
+    	else{
+    		redirecTo = "403";
+    	}
+    	return redirecTo;	
+    }
     
     private ResponseEntity<String> createJsonResponse( Object o )
 	{

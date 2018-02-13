@@ -5,10 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-<jsp:include page="../fragments/headTag.jsp" />
+<jsp:include page="fragments/headTag.jsp" />
 <!-- Styles required by this views -->
-<spring:url value="/resources/vendors/css/select2.min.css" var="select2css" />
-<link href="${select2css}" rel="stylesheet" type="text/css"/>
+
 </head>
 <!-- BODY options, add following classes to body to change options
 
@@ -39,36 +38,19 @@
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
   <!-- Header -->
-  <jsp:include page="../fragments/bodyHeader.jsp" />
   <div class="app-body">
-  	<!-- Navigation -->
-  	<jsp:include page="../fragments/sideBar.jsp" />
+  	
     <!-- Main content -->
     <main class="main">
-	  <spring:url value="/users/chgPass" var="saveUserUrl"></spring:url>
-  	  <spring:url value="/logout" var="usuarioUrl"/>		
-      <!-- Breadcrumb -->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home" /></a></li>
-        <li class="breadcrumb-item active"><c:out value="${user.username}" /></li>
-        <!-- Breadcrumb Menu-->
-        <li class="breadcrumb-menu d-md-down-none">
-          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="#"><i class="icon-speech"></i></a>
-            <a class="btn" href="<spring:url value="/" htmlEscape="true "/>"><i class="icon-graph"></i> &nbsp;<spring:message code="dashboard" /></a>
-            <a class="btn" href="<spring:url value="/logout" htmlEscape="true" />"><i class="icon-logout"></i> &nbsp;<spring:message code="logout" /></a>
-          </div>
-        </li>
-      </ol>
+
 	  <!-- Container -->
       <div class="container-fluid">
-
         <div class="animated fadeIn">
-          <div class="row">
+        	<div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <i class="icon-key"></i> <spring:message code="changepass" />
+                  <i class="icon-key"></i> <spring:message code="resetPassword" />
                   <div class="card-actions">
                     
                   </div>
@@ -78,24 +60,27 @@
                   <div class="row">
 
                     <div class="col-md-8">
-                      <form action="#" autocomplete="off" id="add-user-form">                      
-						<div class="form-group">
+                      <form action="#" autocomplete="off" id="send-pass-form">
+                      	<div class="form-group">
 	                      <div class="input-group">
-	                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-	                        <input type="password" autocomplete="new-password" id="password" name="password" class="form-control" placeholder="<spring:message code="login.password" />">
+	                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	                        <input type="text" id="username" name="username" value="" class="form-control" placeholder="<spring:message code="username" />">
 	                      </div>
-	                    </div> 
+	                    </div>                      
 	                    <div class="form-group">
 	                      <div class="input-group">
-	                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-	                        <input type="password" autocomplete="new-password" id="confirm_password" name="confirm_password" class="form-control" placeholder="<spring:message code="password.repeat" />">
+	                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	                        <input type="text" id="email" name="email" value="" class="form-control" placeholder="<spring:message code="useremail" />">
 	                      </div>
 	                    </div>
                         
                         <div class="form-group">
-                          <button type="submit" class="btn btn-primary" id="guardar"><i class="fa fa-save"></i>&nbsp;<spring:message code="save" /></button>
-						  <a href="${fn:escapeXml(usuarioUrl)}" class="btn btn-danger"><i class="fa fa-undo"></i>&nbsp;<spring:message code="cancel" /></a>
+                          <button type="submit" class="btn btn-primary" id="guardar"><i class="fa fa-unlock-alt"></i>&nbsp;<spring:message code="ok" /></button>
                         </div>
+                        
+                        <div class="col-6 text-right">
+		                    <a href="<spring:url value="/login" htmlEscape="true "/>" class="btn btn-link px-0"><spring:message code="backLogin"/></a>
+		                </div>
                       </form>
                     </div>
                   </div>
@@ -106,17 +91,16 @@
           </div>
           <!-- /.row -->
         </div>
-
       </div>
-      <!-- /.conainer-fluid -->
+      <!-- /.container-fluid -->
     </main>
     
   </div>
-  <!-- Pie de p�gina -->
-  <jsp:include page="../fragments/bodyFooter.jsp" />
+  <!-- Pie de página -->
+  <jsp:include page="fragments/bodyFooter.jsp" />
 
   <!-- Bootstrap and necessary plugins -->
-  <jsp:include page="../fragments/corePlugins.jsp" />
+  <jsp:include page="fragments/corePlugins.jsp" />
 
   <!-- GenesisUI main scripts -->
   <spring:url value="/resources/js/app.js" var="App" />
@@ -139,27 +123,23 @@
       <spring:param name="language" value="${lenguaje}" />
   </spring:url>
   <script src="${jQValidationLoc}"></script>
-  <spring:url value="/resources/vendors/js/select2.min.js" var="Select2" />
-  <script src="${Select2}" type="text/javascript"></script>
   
-
   <!-- Custom scripts required by this view -->
-  <spring:url value="/resources/js/views/chgPassUser.js" var="processUser" />
-  <script src="${processUser}"></script>
+  <spring:url value="/resources/js/views/resetPassword.js" var="resetPassword" />
+  <script src="${resetPassword}"></script>
   
-<c:set var="successmessage"><spring:message code="process.success" /></c:set>
-<c:set var="errormessage"><spring:message code="process.errors" /></c:set>
-<c:set var="waitmessage"><spring:message code="process.wait" /></c:set>
-
-<script>
+  <spring:url value="/resetPassword" var="generateTokenUrl"></spring:url>
+  <spring:url value="/login" var="loginUrl"></spring:url>
+  
+  <script>
 	jQuery(document).ready(function() {
-		var parametros = {saveUserUrl: "${saveUserUrl}", successmessage: "${successmessage}",
+		var parametros = {generateTokenUrl: "${generateTokenUrl}", successmessage: "${successmessage}",
 				errormessage: "${errormessage}",waitmessage: "${waitmessage}",
-				usuarioUrl: "${usuarioUrl}" 
+				loginUrl: "${loginUrl}" 
 		};
-		ProcessUser.init(parametros);
+		ResetPassword.init(parametros);
 	});
 </script>
-  
+
 </body>
 </html>

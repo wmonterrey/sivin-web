@@ -2411,6 +2411,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	@Override
 	public boolean isFieldAuditable(String fieldname) {
+		//Campos no auditables en la tabla
 		return true;
 	}
 

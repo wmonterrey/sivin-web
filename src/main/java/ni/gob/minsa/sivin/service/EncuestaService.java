@@ -97,7 +97,7 @@ public class EncuestaService {
 			sqlQuery = sqlQuery + " and enc.codigo =:codigo";
 		}
 		if (!nombre.matches("")) {
-			sqlQuery = sqlQuery + " and enc.jefeFamilia like:nombre";
+			sqlQuery = sqlQuery + " and lower(enc.jefeFamilia) like:nombre";
 		}
 		if(zonas.equals("ZON_REP_1")) {
 			sqlQuery = sqlQuery + " and enc.segmento.procedencia=:procedencia";
@@ -128,7 +128,7 @@ public class EncuestaService {
 			query.setParameter("codigo", codigo);
 		}
 		if (!nombre.matches("")) {
-			query.setParameter("nombre", "%"+nombre+"%");
+			query.setParameter("nombre", "%"+nombre.toLowerCase()+"%");
 		}
 		if(zonas.equals("ZON_REP_1")) {
 			query.setParameter("procedencia", zonafiltrar);

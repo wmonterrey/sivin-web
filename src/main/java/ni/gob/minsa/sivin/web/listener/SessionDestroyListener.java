@@ -22,10 +22,14 @@ public class SessionDestroyListener implements ApplicationListener<SessionDestro
         for (SecurityContext securityContext : lstSecurityContext)
         {
         	logger.info(securityContext.toString());
-        	WebAuthenticationDetails wad  = (WebAuthenticationDetails) securityContext.getAuthentication().getDetails();
         	String username = securityContext.getAuthentication().getName();
-        	String idSesion = wad.getSessionId();
-        	String direccionIp = wad.getRemoteAddress();
+        	String idSesion = "";
+        	String direccionIp = "";
+        	WebAuthenticationDetails wad  = (WebAuthenticationDetails) securityContext.getAuthentication().getDetails();
+        	if(wad!=null) {
+        		idSesion = wad.getSessionId();
+        		direccionIp = wad.getRemoteAddress();
+        	}
         	userDetailsDao.updateAccessDateLogout(username, idSesion,direccionIp);
         }
 	}
