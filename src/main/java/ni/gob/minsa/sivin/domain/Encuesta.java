@@ -73,6 +73,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String gradoEnt;
 	private String entRealizada;
 	private String entEmb;
+	private String entEmbUnico;
 	private String entDioluz;
 	private String entHieacfol;
 	private String entMeseshierro;
@@ -178,10 +179,12 @@ public class Encuesta extends BaseMetaData implements Auditable{
 	private String assitioReunionPeso;
 	
 	//SECCION F
+	private String pesoTallaEnt;
 	private Float pesoEnt1;
 	private Float pesoEnt2;
 	private Float tallaEnt1;
 	private Float tallaEnt2;
+	private String pesoTallaNin;
 	private Float pesoNin1;
 	private Float pesoNin2;
 	private Float longNin1;
@@ -298,7 +301,7 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.ident = ident;
 	}
 
-	@Column(name = "codigo", nullable = false, length = 50)
+	@Column(name = "codigo", nullable = false, length = 115)
 	public String getCodigo() {
 		return codigo;
 	}
@@ -576,6 +579,14 @@ public class Encuesta extends BaseMetaData implements Auditable{
 		this.entEmb = entEmb;
 	}
 
+	@Column(name = "entEmbUnico", nullable = true, length = 1)
+	public String getEntEmbUnico() {
+		return entEmbUnico;
+	}
+
+	public void setEntEmbUnico(String entEmbUnico) {
+		this.entEmbUnico = entEmbUnico;
+	}
 	
 	@Column(name = "entDioluz", nullable = true, length = 1)
 	public String getEntDioluz() {
@@ -1479,6 +1490,25 @@ public class Encuesta extends BaseMetaData implements Auditable{
 
 	public void setAssitioReunionPeso(String assitioReunionPeso) {
 		this.assitioReunionPeso = assitioReunionPeso;
+	}
+	
+	
+	@Column(name = "pesoTallaEnt", nullable = true, length = 2)
+	public String getPesoTallaEnt() {
+		return pesoTallaEnt;
+	}
+
+	public void setPesoTallaEnt(String pesoTallaEnt) {
+		this.pesoTallaEnt = pesoTallaEnt;
+	}
+
+	@Column(name = "pesoTallaNin", nullable = true, length = 2)
+	public String getPesoTallaNin() {
+		return pesoTallaNin;
+	}
+
+	public void setPesoTallaNin(String pesoTallaNin) {
+		this.pesoTallaNin = pesoTallaNin;
 	}
 
 	@Column(name = "pesoent1", nullable = true)

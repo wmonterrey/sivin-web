@@ -60,6 +60,7 @@
 		<c:set var="userLockedLabel"><spring:message code="login.accountLocked" /></c:set>
 		<c:set var="userUnlockedLabel"><spring:message code="login.accountNotLocked" /></c:set>
 		<c:set var="habilitar"><spring:message code="enable" /></c:set>
+		<c:set var="agregar"><spring:message code="add" /> <spring:message code="all" /></c:set>
 		<c:set var="deshabilitar"><spring:message code="disable" /></c:set>
 		<c:set var="bloquear"><spring:message code="lock" /></c:set>
 		<c:set var="desbloquear"><spring:message code="unlock" /></c:set>
@@ -435,7 +436,11 @@
 			            </table>
 	                </div>
 	                <div class="card-header">
-	                	<div class="row float-right mr-4" >
+	                	<div class="row float-right mr-10" >
+			            	<spring:url value="/admin/users/addSegmentos/{username}/" var="addAllSegmentosUrl"><spring:param name="username" value="${user.username}" /></spring:url>
+			            	<button type="button" class="btn btn-primary" id="addSegmentos" data-toggle="modal" data-whatever="${fn:escapeXml(addAllSegmentosUrl)}"><i class="fa fa-plus"></i>&nbsp;<spring:message code="add" /> <spring:message code="all" /></button>
+			            </div>
+			            <div class="row float-right mr-4" >
 			            	<spring:url value="/admin/users/addSegmento/{username}/" var="addSegmentoUrl"><spring:param name="username" value="${user.username}" /></spring:url>
 			            	<button type="button" class="btn btn-primary" id="addSegmento" data-toggle="modal" data-whatever="${fn:escapeXml(addSegmentoUrl)}"><i class="fa fa-plus"></i>&nbsp;<spring:message code="add" /></button>
 			            </div>
@@ -750,6 +755,13 @@
     	$('#accionUrl').val($(this).data('whatever'));
     	$('#titulo').html('<h2 class="modal-title">'+"${confirmar}"+'</h2>');
     	$('#cuerpo').html('<h3>'+"${desbloquear}"+' '+ titUnLock.substr(titUnLock.lastIndexOf("/")+1) +'?</h3>');
+    	$('#basic').modal('show');
+    });
+
+    $("#addSegmentos").click(function(){ 
+    	$('#accionUrl').val($(this).data('whatever'));
+    	$('#titulo').html('<h2 class="modal-title">'+"${confirmar}"+'</h2>');
+    	$('#cuerpo').html('<h3>'+"${agregar}"+'?</h3>');
     	$('#basic').modal('show');
     });
  

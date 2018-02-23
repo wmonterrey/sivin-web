@@ -132,7 +132,7 @@ public class AdminUsuariosController {
      * @param confirmPassword Contraseña confirmar
      * @param password Contraseña
      * @param email Correo
-     * @param roles Roles
+     * @param authorities Roles
      * @param segmentos Segmentos
      * @return a ModelMap with the model attributes for the view
      */
@@ -437,6 +437,40 @@ public class AdminUsuariosController {
     		redirecTo = "redirect:/admin/users/{username}/";
     		redirectAttributes.addFlashAttribute("segmentoAgregado", true);
     		redirectAttributes.addFlashAttribute("nombreSegmento", segment.getCodigo());
+    	}
+    	else{
+    		redirecTo = "403";
+    	}
+    	return redirecTo;	
+    }
+    
+    /**
+     * Custom handler for adding all segmentos.
+     *
+     * @param username the ID of the user
+     * @param redirectAttributes Regresa nombre de usuario
+     * @return a String
+     */
+    @RequestMapping("/addSegmentos/{username}/")
+    public String addSegmentos(@PathVariable("username") String username, 
+    		RedirectAttributes redirectAttributes) {
+    	String redirecTo="404";
+    	UserSistema usuarioActual = this.usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+    	UserSistema usuario = this.usuarioService.getUser(username);
+    	List<Segmento> segmentos = segmentoService.getSegmentosNoTieneUsuario(username);
+    	if(usuario!=null){
+    		for(Segmento seg: segmentos) {
+    			UsuarioSegmento segmentoUser = new UsuarioSegmento();
+    			segmentoUser.setUsuarioSegmentoId(new UsuarioSegmentoId(usuario.getUsername(), seg.getIdent()));
+    			segmentoUser.setUser(usuario);
+    			segmentoUser.setSegment(seg);
+    			segmentoUser.setRecordUser(usuarioActual.getUsername());
+        		segmentoUser.setRecordDate(new Date());
+    			this.segmentoService.saveUsuarioSegmento(segmentoUser);
+    		}
+    		redirecTo = "redirect:/admin/users/{username}/";
+    		redirectAttributes.addFlashAttribute("segmentoAgregado", true);
+    		redirectAttributes.addFlashAttribute("nombreSegmento", segmentos.size()+" Agregados");
     	}
     	else{
     		redirecTo = "403";

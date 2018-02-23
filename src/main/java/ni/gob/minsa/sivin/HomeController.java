@@ -120,7 +120,7 @@ public class HomeController {
 		                + "El enlace para recuperar su contraseña es: \n\n"
 		                + url + "\n\n"
 		                + "Este enlace será válido por 24 horas. Favor no contestar este mensaje";
-			emailServiceImpl.sendEmail(user.getEmail(), "wravmon@gmail.com", "Reset password SIVIN",mensaje);
+			emailServiceImpl.sendEmail(user.getEmail(), "no-reply", "Reset password SIVIN",mensaje);
 			genericResponse = new GenericResponse("success", user.getCompleteName() + ", por favor revise su correo / please check your email, " + user.getEmail());
 			
 		}

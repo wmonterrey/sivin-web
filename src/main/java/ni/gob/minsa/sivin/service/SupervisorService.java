@@ -60,7 +60,7 @@ public class SupervisorService {
 	
 	/**
 	 * Regresa un Supervisor
-	 * 
+	 * @param ident Identificador de supervisor
 	 * @return <code>Supervisor</code>
 	 */
 	public Supervisor getSupervisor(String ident) {

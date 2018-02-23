@@ -38,11 +38,16 @@ public class Segmento extends BaseMetaData implements Auditable{
 	private String ident;
 	private String codigo;
 	private String departamento;
+	private String codMun;
 	private String municipio;
 	private String comunidad;
 	private String region;
 	private String procedencia;
+	private String estrato;
+	private Integer vivParticulares;
+	private Integer vivInicial;
 	private String codigoSis;
+	private String grupo;
 	
 	
 	public Segmento() {
@@ -75,7 +80,7 @@ public class Segmento extends BaseMetaData implements Auditable{
 		this.ident = ident;
 	}
 
-	@Column(name = "codigo", nullable = false, length = 105)
+	@Column(name = "codigo", nullable = false, length = 100)
 	public String getCodigo() {
 		return codigo;
 	}
@@ -104,8 +109,62 @@ public class Segmento extends BaseMetaData implements Auditable{
 	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
 	}
+	
+	
+	@Column(name = "codMun", nullable = false, length = 10)
+	public String getCodMun() {
+		return codMun;
+	}
 
-	@Column(name = "comunidad", nullable = false, length = 100)
+
+	public void setCodMun(String codMun) {
+		this.codMun = codMun;
+	}
+
+	@Column(name = "estrato", nullable = false, length = 10)
+	public String getEstrato() {
+		return estrato;
+	}
+
+
+	public void setEstrato(String estrato) {
+		this.estrato = estrato;
+	}
+	
+	
+	@Column(name = "grupo", nullable = false, length = 10)
+	public String getGrupo() {
+		return grupo;
+	}
+
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
+
+
+	@Column(name = "vivParticulares", nullable = true)
+	public Integer getVivParticulares() {
+		return vivParticulares;
+	}
+
+
+	public void setVivParticulares(Integer vivParticulares) {
+		this.vivParticulares = vivParticulares;
+	}
+
+	@Column(name = "vivInicial", nullable = true)
+	public Integer getVivInicial() {
+		return vivInicial;
+	}
+
+
+	public void setVivInicial(Integer vivInicial) {
+		this.vivInicial = vivInicial;
+	}
+
+
+	@Column(name = "comunidad", nullable = false, length = 150)
 	public String getComunidad() {
 		return comunidad;
 	}
@@ -125,7 +184,7 @@ public class Segmento extends BaseMetaData implements Auditable{
 		this.region = region;
 	}
 
-	@Column(name = "procedencia", nullable = false, length = 50)
+	@Column(name = "procedencia", nullable = true, length = 10)
 	public String getProcedencia() {
 		return procedencia;
 	}

@@ -28,7 +28,11 @@ public class ReportesService {
 	
 	/**
 	 * Regresa datos de hogar
-	 * 
+	 * @param reporte Reporte 
+	 * @param date1 Filtro de fecha 
+	 * @param date2 Filtro de fecha hasta
+	 * @param zonas zona a filtrar
+	 * @param zonafiltrar nombre de la zona
 	 * @return lista de objetos
 	 */
 	@SuppressWarnings("unchecked")
@@ -111,7 +115,11 @@ public class ReportesService {
 	
 	/**
 	 * Regresa datos de vivienda
-	 * 
+	 * @param reporte Reporte 
+	 * @param date1 Filtro de fecha 
+	 * @param date2 Filtro de fecha hasta
+	 * @param zonas zona a filtrar
+	 * @param zonafiltrar nombre de la zona
 	 * @return lista de objetos
 	 */
 	@SuppressWarnings("unchecked")

@@ -93,7 +93,7 @@ public class SegmentoService {
 	
 	/**
 	 * Regresa un segmento
-	 * 
+	 * @param segmento El segmento a buscar
 	 * @return <code>Segmento</code>
 	 */
 	public Segmento getSegmento(String segmento) {
@@ -186,7 +186,7 @@ public class SegmentoService {
 	
 	/**
 	 * Guarda un UsuarioSegmento
-	 * @param segmento El UsuarioSegmento a guardar
+	 * @param us El UsuarioSegmento a guardar
 	 * 
 	 */
 	public void saveUsuarioSegmento(UsuarioSegmento us) {

@@ -63,10 +63,9 @@
 	  <!-- Container -->
 	  <div class="container-fluid">
         <div class="animated fadeIn">
-          <spring:url value="/resources/img/fabrettoapple.png" var="logofab" />
           <div class="card">
             <div class="card-header">
-              <img src="${logofab}" alt="<spring:message code="'title'" />" />&nbsp;<i class="fa fa-flag"></i> <spring:message code="translations" />
+              <i class="fa fa-flag"></i> <spring:message code="translations" />
               <div class="card-actions">
               </div>
             </div>
@@ -121,11 +120,11 @@
 
   <!-- Lenguaje -->
   <c:choose>
-	<c:when test="${cookie.eFabrettoLang.value == null}">
+	<c:when test="${cookie.eSivinLang.value == null}">
 		<c:set var="lenguaje" value="es"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="lenguaje" value="${cookie.eFabrettoLang.value}"/>
+		<c:set var="lenguaje" value="${cookie.eSivinLang.value}"/>
 	</c:otherwise>
   </c:choose>
   <spring:url value="/resources/vendors/js/i18n/datatables/label_{language}.json" var="dataTablesLang">

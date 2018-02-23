@@ -45,7 +45,7 @@ public class EncuestaService {
 	
 	/**
 	 * Regresa una encuesta
-	 * 
+	 * @param ident Identificador
 	 * @return una <code>Encuesta</code>
 	 */
 	public Encuesta getEncuesta(String ident) {
@@ -81,6 +81,10 @@ public class EncuestaService {
 	 * Regresa todos las encuestas activas dependiendo del filtro
 	 * @param codigo Codigo de la encuesta.
 	 * @param nombre Nombre del jefe de familia. 
+	 * @param desde Filtro de fecha 
+	 * @param hasta Filtro de fecha hasta
+	 * @param zonas zona a filtrar
+	 * @param zonafiltrar nombre de la zona
 	 * @return una lista de <code>Encuesta</code>(s)
 	 */
 

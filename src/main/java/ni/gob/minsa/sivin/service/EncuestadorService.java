@@ -60,7 +60,7 @@ public class EncuestadorService {
 	
 	/**
 	 * Regresa un Encuestador
-	 * 
+	 * @param ident Identificador
 	 * @return <code>Encuestador</code>
 	 */
 	public Encuestador getEncuestador(String ident) {

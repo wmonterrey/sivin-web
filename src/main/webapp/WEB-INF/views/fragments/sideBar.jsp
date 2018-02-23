@@ -58,6 +58,19 @@
 	            </ul>
 	        </li>
 	        </sec:authorize>
+	        <sec:authorize url="/movil/">
+            <li class="nav-item nav-dropdown descargas">
+	            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-screen-tablet"></i><spring:message code="downloads" /></a>
+	            <ul class="nav-dropdown-items">
+	                <li class="nav-item">
+	                    <a class="nav-link" href="<spring:url value="/resources/apk/sivin-app.apk" htmlEscape="true "/>"><i class="icon-screen-smartphone"></i><spring:message code="sivin.app" /></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="<spring:url value="/resources/apk/BarcodeScanner4.31.apk" htmlEscape="true "/>"><i class="fa fa-barcode"></i><spring:message code="barcode.app" /></a>
+	                </li>
+	            </ul>
+	        </li>
+	        </sec:authorize>
 	        <sec:authorize url="/exportar/">
 	        <li class="nav-item">
                 <a class="nav-link" href="<spring:url value="/exportar/" htmlEscape="true" />"><i class="icon-briefcase"></i><spring:message code="export" /></a>
