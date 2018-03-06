@@ -899,4 +899,16 @@ INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, 
 /*Opciones exportacion*/
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP', NULL, NULL, NULL, '1', 0, '0', 'Opciones exportación');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_1','1','OPC_EXP',NULL,'0',1,'0','Exportar todo');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_2','2','OPC_EXP',NULL,'0',2,'0','Sección Hogar');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_3','3','OPC_EXP',NULL,'0',3,'0','Sección A');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_4','4','OPC_EXP',NULL,'0',4,'0','Sección B');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_5','5','OPC_EXP',NULL,'0',5,'0','Sección C');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_6','6','OPC_EXP',NULL,'0',6,'0','Sección D');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_7','7','OPC_EXP',NULL,'0',7,'0','Sección E');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_8','8','OPC_EXP',NULL,'0',8,'0','Sección F');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_9','9','OPC_EXP',NULL,'0',9,'0','Sección G');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_10','10','OPC_EXP',NULL,'0',10,'0','Sección H');
+
+
+
 

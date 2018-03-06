@@ -17,10 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,20 +42,28 @@ public class ExportarController {
     	logger.debug("Exportar datos");
     	List<MessageResource> opcionesDisp = messageResourceService.getCatalogo("OPC_EXP");
     	model.addAttribute("opcionesDisp", opcionesDisp);
+    	List<MessageResource> zonasRep = messageResourceService.getCatalogo("ZON_REP");
+    	model.addAttribute("zonasRep", zonasRep);
     	return "exportar/exportarDatos";
 	}
 	
     @RequestMapping(value = "/getdata/", method = RequestMethod.GET)
     public void getData(@RequestParam(value = "opcion", required = true) String opcion,
-    		@RequestParam(value = "daterange", required = false, defaultValue = "") String daterange,
+    		@RequestParam(value = "daterange", required = false, defaultValue = "") String dateRange,
+    		@RequestParam(value = "zonas", required = true) String zonas,
+    		@RequestParam(value = "zonafiltrar", required = false, defaultValue = "") String zonafiltrar,
             HttpServletResponse response) throws Exception {
     	
-    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date date1 = formatter.parse(daterange.substring(0, 10));
-        Date date2 = formatter.parse(daterange.substring(daterange.length()-10, daterange.length()));
-        Timestamp desde = new Timestamp(date1.getTime());
-        Timestamp hasta = new Timestamp(date2.getTime());
-        StringBuffer registros = exportarService.getExportData(opcion,desde,hasta);
+    	
+    	Long desde = null;
+        Long hasta = null;
+        if (!dateRange.matches("")) {
+        	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        	desde = formatter.parse(dateRange.substring(0, 10)).getTime();
+        	hasta = formatter.parse(dateRange.substring(dateRange.length()-10, dateRange.length())).getTime();
+        }
+    	
+        StringBuffer registros = exportarService.getExportData(opcion,desde,hasta, zonas, zonafiltrar);
         InputStream inputStream = new ByteArrayInputStream(registros.toString().getBytes());
         String mimeType = "text/csv";
         response.setContentType(mimeType);

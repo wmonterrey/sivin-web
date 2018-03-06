@@ -78,6 +78,21 @@ public class OpcionesController {
     }
     
     /**
+     * Retorna una lista de strings grupos. Acepta una solicitud GET para JSON
+     * @return Un arreglo JSON de strings grupos
+     */
+    @RequestMapping(value = "grupos", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<String> fetchGruposJson() {
+        logger.info("Obteniendo los grupos en JSON");
+        
+        List<String> grupos = segmentoService.getGruposActivos();
+        if (grupos == null){
+        	logger.debug("Nulo");
+        }
+        return grupos;	
+    }
+    
+    /**
      * Retorna una lista de strings departamentos. Acepta una solicitud GET para JSON
      * @return Un arreglo JSON de strings departamentos
      */

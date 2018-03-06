@@ -88,7 +88,7 @@ return {
   $('#zonas').change(
 		  function() {
 			$('#zonafiltrar').html('');
-  			if ($('#zonas option:selected').val() == "all"){
+  			if ($('#zonas option:selected').val() == "ZON_REP_0"){
   				$('#zonafiltrar').parent().hide(); 
   			}
   			else if ($('#zonas option:selected').val() == "ZON_REP_1"){
@@ -99,7 +99,7 @@ return {
     				var html;
     				var len = data.length;
     				for ( var i = 0; i < len; i++) {
-    					html += '<option value="' + data[i].catKey + '">'+ data[i].spanish +'</option>';
+    					html += '<option value="' + data[i] + '">'+ data[i] +'</option>';
     				}
     				$('#zonafiltrar').html(html);
     			});
@@ -230,7 +230,7 @@ return {
 				var d = new Date(data[row].fechaEntrevista);
 				var editUrl = parametros.encuestasUrl + data[row].ident+'/';
 				btnEdit = '<a title="edit" href=' + editUrl + ' class="btn btn-xs btn-primary" ><i class="fa fa-edit"></i></a>';
-				table1.row.add([data[row].segmento.comunidad, data[row].codigo, data[row].jefeFamilia, d.yyyymmdd(), data[row].pasive, btnEdit]);
+				table1.row.add([data[row].segmento.comunidad, data[row].codigo, data[row].jefeFamilia, d.yyyymmdd(), data[row].pasive, data[row].supervisor, btnEdit]);
 			}
 		}
 	})

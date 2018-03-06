@@ -86,13 +86,32 @@
 		                    </select>
 		                    </select>
 		                  </fieldset>
+		                  
 		                  <fieldset class="form-group">
 			                  <label><spring:message code="byDate" /></label>
 			                  <div class="input-group">
-			                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-			                    <input name="daterange" class="form-control" type="text">
+			                    <span class="input-group-addon"><input type="checkbox" id="checkDates" name="checkDates" value=""></span>
+			                    <input id="daterange" name="daterange" class="form-control" disabled type="text">
 			                  </div>
 		                  </fieldset>
+		                  <div class="row">
+			                  <fieldset class="form-group col-sm-4">
+			                    <label><spring:message code="byZone" /></label>
+			                    <select id="zonas" name="zonas" class="form-control select2-single">
+			                      <c:forEach items="${zonasRep}" var="zona">
+			                      	<option value="${zona.messageKey}"><spring:message code="${zona.messageKey}" /></option>
+			                      </c:forEach>
+			                    </select>
+			                    </select>
+			                  </fieldset>
+			                  <fieldset class="form-group col-sm-8">
+			                    <label>&nbsp;</label>
+			                    <select id="zonafiltrar" name="zonafiltrar" class="form-control select2-single">
+			                    </select>
+			                    </select>
+			                  </fieldset>
+		                  </div>
+		                  
 		                  <div class="row float-right mr-4" >  
 		                    	<button type="submit" class="btn btn-primary" id="verreporte""><i class="fa fa-check"></i>&nbsp;<spring:message code="export" /></button>
 				          </div>
@@ -158,7 +177,11 @@
   <!-- Custom scripts required by this view -->
   <spring:url value="/resources/js/views/Export.js" var="processExport" />
   <script src="${processExport}"></script>
-
+<spring:url value="/opciones/municipios" var="opcMuniUrl"/>
+<spring:url value="/opciones/regiones" var="opcRegUrl"/>
+<spring:url value="/opciones/departamentos" var="opcDepUrl"/>
+<spring:url value="/opciones/segmentos" var="opcSegUrl"/>
+<spring:url value="/opciones/grupos" var="opcProcUrl"/>
 <spring:url value="/exportar/getdata/" var="exportUrl"/>
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
@@ -167,7 +190,8 @@
 
 <script>
 	jQuery(document).ready(function() {
-		var parametros = {exportUrl: "${exportUrl}",successmessage: "${successmessage}",
+		var parametros = {opcMuniUrl: "${opcMuniUrl}", opcSegUrl: "${opcSegUrl}", opcRegUrl: "${opcRegUrl}", opcDepUrl: "${opcDepUrl}",
+				opcProcUrl: "${opcProcUrl}",exportUrl: "${exportUrl}",successmessage: "${successmessage}",
 				errormessage: "${errormessage}",waitmessage: "${waitmessage}" ,dataTablesLang: "${dataTablesLang}",noResults: "${noResults}"
 		};
 		ProcessExport.init(parametros);

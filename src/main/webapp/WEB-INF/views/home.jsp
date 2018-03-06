@@ -468,7 +468,7 @@ $(function(){
         borderColor : 'rgba(220,220,220,0.8)',
         highlightFill: 'rgba(220,220,220,0.75)',
         highlightStroke: 'rgba(220,220,220,1)',
-        data : encuestasmunact
+        data : encuestasdepact
       },
       {
 	   	label: "${encinact}",
@@ -476,7 +476,7 @@ $(function(){
         borderColor : 'rgba(151,187,205,0.8)',
         highlightFill : 'rgba(151,187,205,0.75)',
         highlightStroke : 'rgba(151,187,205,1)',
-        data : encuestasmuninact
+        data : encuestasdepinact
       }
     ]
   }
@@ -523,7 +523,6 @@ $(function(){
     }
   });
 
-
   var procedencias = [];
   var encuestasproact = [];
 
@@ -531,29 +530,29 @@ $(function(){
   	procedencias.push(["${encuestapro[0]}"]);
   	encuestasproact.push(["${encuestapro[3]}"]);
   </c:forEach>	
-  
-  var pieData = {
-    labels: procedencias,
-    datasets: [{
-      data: encuestasproact,
-      backgroundColor: [
-        '#877264',
-        '#bdbfab'
-      ],
-      hoverBackgroundColor: [
-        '#877264',
-        '#bdbfab'
-      ]
-    }]
-  };
-  var ctx = document.getElementById('proc-chart');
-  var chart = new Chart(ctx, {
-    type: 'pie',
-    data: pieData,
-    options: {
-      responsive: true
-    }
-  });
+
+  var barChartData5 = {
+	    labels : procedencias,
+	    datasets : [
+	      {
+	    	label: "${encact}",  
+	        backgroundColor : 'rgba(48, 48, 48, 0.5)',
+	        borderColor : 'rgba(220,220,220,0.8)',
+	        highlightFill: 'rgba(220,220,220,0.75)',
+	        highlightStroke: 'rgba(220,220,220,1)',
+	        data : encuestasproact
+	      }
+	    ]
+	  }
+	  var ctx = document.getElementById('proc-chart');
+	  var chart = new Chart(ctx, {
+	    type: 'bar',
+	    data: barChartData5,
+	    options: {
+	      responsive: true,
+	      "scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}
+	    }
+	  });
 
   var sexos = [];
   var encuestassexact = [];

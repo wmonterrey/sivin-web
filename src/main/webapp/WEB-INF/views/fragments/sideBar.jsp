@@ -36,6 +36,9 @@
 	                <li class="nav-item">
 	                    <a class="nav-link" href="<spring:url value="/super/encuestas/" htmlEscape="true "/>"><i class="icon-magnifier"></i><spring:message code="supenc" /></a>
 	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="<spring:url value="/super/duplicados/" htmlEscape="true "/>"><i class="icon-layers"></i><spring:message code="supdup" /></a>
+	                </li>
 	            </ul>
 	        </li>
 	        </sec:authorize>

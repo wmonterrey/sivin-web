@@ -8,6 +8,12 @@ return {
 		theme: "bootstrap"
 	});
 	
+	$('#zonas, #zonafiltrar').select2({
+		theme: "bootstrap"
+	});
+	
+	$('#zonafiltrar').parent().hide(); 
+	
 	
 	$('input[name="daterange"]').daterangepicker({
 	   ranges: {
@@ -57,6 +63,88 @@ return {
 	   },
 	});
 	
+	
+	$('#checkDates').change(function() {
+        if(this.checked) {
+        	$("#daterange").prop('disabled', false);
+        }else{
+        	$("#daterange").prop('disabled', true);
+        }
+              
+    });
+	
+	$('#zonas').change(
+			  function() {
+				$('#zonafiltrar').html('');
+	  			if ($('#zonas option:selected').val() == "ZON_REP_0"){
+	  				$('#zonafiltrar').parent().hide(); 
+	  			}
+	  			else if ($('#zonas option:selected').val() == "ZON_REP_1"){
+	  				$('#zonafiltrar').parent().show();
+	  				$.getJSON(parametros.opcProcUrl, {
+	    				ajax : 'true'
+	    			}, function(data) {
+	    				var html;
+	    				var len = data.length;
+	    				for ( var i = 0; i < len; i++) {
+	    					html += '<option value="' + data[i] + '">'+ data[i] +'</option>';
+	    				}
+	    				$('#zonafiltrar').html(html);
+	    			});
+	  			}  
+	  			else if ($('#zonas option:selected').val() == "ZON_REP_2"){
+	  				$('#zonafiltrar').parent().show();
+	  				$.getJSON(parametros.opcRegUrl, {
+	    				ajax : 'true'
+	    			}, function(data) {
+	    				var html;
+	    				var len = data.length;
+	    				for ( var i = 0; i < len; i++) {
+	    					html += '<option value="' + data[i] + '">'+ data[i] +'</option>';
+	    				}
+	    				$('#zonafiltrar').html(html);
+	    			});
+	  			} 
+	  			else if ($('#zonas option:selected').val() == "ZON_REP_3"){
+	  				$('#zonafiltrar').parent().show();
+	  				$.getJSON(parametros.opcDepUrl, {
+	    				ajax : 'true'
+	    			}, function(data) {
+	    				var html;
+	    				var len = data.length;
+	    				for ( var i = 0; i < len; i++) {
+	    					html += '<option value="' + data[i] + '">'+ data[i] +'</option>';
+	    				}
+	    				$('#zonafiltrar').html(html);
+	    			});
+	  			}
+	  			else if ($('#zonas option:selected').val() == "ZON_REP_4"){
+	  				$('#zonafiltrar').parent().show();
+	  				$.getJSON(parametros.opcMuniUrl, {
+	    				ajax : 'true'
+	    			}, function(data) {
+	    				var html;
+	    				var len = data.length;
+	    				for ( var i = 0; i < len; i++) {
+	    					html += '<option value="' + data[i] + '">'+ data[i] +'</option>';
+	    				}
+	    				$('#zonafiltrar').html(html);
+	    			});
+	  			} 
+	  			else if ($('#zonas option:selected').val() == "ZON_REP_5"){
+	  				$('#zonafiltrar').parent().show();
+	  				$.getJSON(parametros.opcSegUrl, {
+	    				ajax : 'true'
+	    			}, function(data) {
+	    				var html;
+	    				var len = data.length;
+	    				for ( var i = 0; i < len; i++) {
+	    					html += '<option value="' + data[i].ident + '">'+ data[i].codigo +'</option>';
+	    				}
+	    				$('#zonafiltrar').html(html);
+	    			});
+	  			}
+	          });
 
   $( '#export-form' ).validate( {
 	    rules: {

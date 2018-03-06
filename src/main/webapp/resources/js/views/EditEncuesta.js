@@ -60,6 +60,10 @@ return {
   });
   
   handleDatePickers('es');
+  
+  $('#numEncuesta').change(function() {
+	  $("#codigo").val($("#segCodigo").text()+"-"+$("#numEncuesta").val());    
+  });
 
   jQuery.validator.addMethod("noSpace", function(value, element) { 
 		  return value.indexOf(" ") < 0 && value != ""; 

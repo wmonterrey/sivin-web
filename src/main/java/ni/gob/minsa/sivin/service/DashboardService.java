@@ -121,9 +121,9 @@ public class DashboardService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("SELECT seg.procedencia, Count(enc.ident) AS Total, "
+		Query query = session.createQuery("SELECT seg.grupo, Count(enc.ident) AS Total, "
 				+ "SUM( CASE enc.pasive WHEN '1' THEN 1 ELSE 0 END ) AS Invalidas, "
-				+ "SUM( CASE enc.pasive WHEN '0' THEN 1 ELSE 0 END ) AS Validas FROM Encuesta as enc inner join enc.segmento as seg GROUP BY seg.procedencia");
+				+ "SUM( CASE enc.pasive WHEN '0' THEN 1 ELSE 0 END ) AS Validas FROM Encuesta as enc inner join enc.segmento as seg GROUP BY seg.grupo");
 		// Retrieve all
 		return  query.list();
 	}

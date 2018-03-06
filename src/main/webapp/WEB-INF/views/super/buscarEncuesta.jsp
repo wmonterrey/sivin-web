@@ -90,6 +90,11 @@
 		                        <input type="text" id="nombre" name="nombre" disabled class="form-control" placeholder="<spring:message code="entityName" />">
 		                      </div>
 		                    </div>
+	                  		<div class="form-group">
+		                      	<div class="input-group">
+		                        	<span class="input-group-addon"><input type="checkbox" id="checkSinSupervisar" name="checkSinSupervisar"> <spring:message code="notSup" /></span>
+		                      	</div>
+	                    	</div>
 	           			  <fieldset class="form-group">
 			                  <label><spring:message code="byDate" /></label>
 			                  <div class="input-group">
@@ -140,6 +145,7 @@
 			                    <th><spring:message code="jefeFamilia" /></th>
 			                    <th><spring:message code="fechaEntrevista" /></th>
 			                    <th><spring:message code="pasivo" /></th>
+			                    <th><spring:message code="ROLE_SUPER" /></th>
 			                    <th><spring:message code="actions" /></th>
 		                	</tr>
 		                </thead>
@@ -210,7 +216,7 @@
 <spring:url value="/opciones/regiones" var="opcRegUrl"/>
 <spring:url value="/opciones/departamentos" var="opcDepUrl"/>
 <spring:url value="/opciones/segmentos" var="opcSegUrl"/>
-<spring:url value="/opciones/procedencias" var="opcProcUrl"/>
+<spring:url value="/opciones/grupos" var="opcProcUrl"/>
 <spring:url value="/super/encuestas/" var="encuestasUrl"/>
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>

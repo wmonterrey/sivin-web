@@ -86,6 +86,12 @@
 		                      </div>
 		                    </div>
 		                    <div class="form-group">
+		                      <label class="col-md-3 col-form-label"><spring:message code="segmento" />:</label>
+		                      <div class="col-md-9">
+		                        <p id="segCodigo" class="form-control-static"><strong><c:out value="${encuesta.segmento.codigo}" /></strong></p>
+		                      </div>
+		                    </div>
+		                    <div class="form-group">
 		                      <div class="input-group">
 		                        <span class="input-group-addon"><spring:message code="codigo" /></span>
 		                        <form:input path="codigo" readonly="true" class="form-control"/>
@@ -99,6 +105,21 @@
 		                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 		                      </div>
 		                    </div>
+		                    <fieldset class="form-group">
+			                    <label><spring:message code="numEncuesta" /></label>
+			                    <form:select name="numEncuesta" path="numEncuesta" class="form-control select2-single">
+			                    	<c:forEach items="${numeros}" var="numero">
+										<c:choose> 
+											<c:when test="${numero eq encuesta.numEncuesta}">
+												<option selected value="${numero}">${numero}</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${numero}">${numero}</option>
+											</c:otherwise>
+										</c:choose> 
+									</c:forEach>
+			                    </form:select>
+		                  	</fieldset>
 		                    <div class="form-group">
 		                      <div class="input-group">
 		                        <span class="input-group-addon"><spring:message code="jefeFamilia" /></span>

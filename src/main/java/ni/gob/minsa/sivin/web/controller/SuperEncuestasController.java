@@ -36,6 +36,7 @@ import javax.validation.Valid;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,6 +72,7 @@ public class SuperEncuestasController {
 	@RequestMapping(value = "/encuestas/", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody List<Encuesta> fetchEncuestas(@RequestParam(value = "codigo", required = false, defaultValue = "") String codigo,
     		@RequestParam(value = "nombre", required = false, defaultValue = "") String nombre,
+    		@RequestParam(value = "checkSinSupervisar", required = false) boolean checkSinSupervisar,
     		@RequestParam(value = "daterange", required = false, defaultValue = "") String dateRange,
     		@RequestParam(value = "zonas", required = true) String zonas,
     		@RequestParam(value = "zonafiltrar", required = false, defaultValue = "") String zonafiltrar) throws ParseException {
@@ -82,12 +84,20 @@ public class SuperEncuestasController {
         	desde = formatter.parse(dateRange.substring(0, 10)).getTime();
         	hasta = formatter.parse(dateRange.substring(dateRange.length()-10, dateRange.length())).getTime();
         }
-        List<Encuesta> datos = encuestaService.getEncuestasSupervisar(codigo, nombre, desde, hasta, zonas, zonafiltrar);
+        List<Encuesta> datos = encuestaService.getEncuestasSupervisar(codigo, nombre, desde, hasta, zonas, zonafiltrar, checkSinSupervisar);
         if (datos == null){
         	logger.debug("Nulo");
         }
         return datos;
     }
+	
+	@RequestMapping(value = "/duplicados/", method = RequestMethod.GET)
+    public String buscarDuplicados(Model model) throws ParseException { 	
+    	logger.debug("Buscar encuestas");
+    	List<Encuesta> datos = encuestaService.getEncuestasCodigoDuplicado();
+    	model.addAttribute("datos", datos);
+    	return "super/verDuplicados";
+	}
 	
     /**
      * Custom handler for displaying an encuesta.
@@ -127,9 +137,14 @@ public class SuperEncuestasController {
         }
         else{
         	List<MessageResource> sexos = messageResourceService.getCatalogo("CAT_SEXO");
+        	List<Integer> mNumeros = new ArrayList<Integer>();
+    		for (int i=1;i<11;i++) {
+    			mNumeros.add(i);
+    		}
         	mav = new ModelAndView("super/editIdentificacion");
         	mav.addObject("encuesta",encuesta);
         	mav.addObject("sexos",sexos);
+        	mav.addObject("numeros",mNumeros);
         }
         return mav;
     }
@@ -143,6 +158,8 @@ public class SuperEncuestasController {
     		mav = new ModelAndView("404");
         }
         Encuesta encuestaBD = encuestaService.getEncuesta(encuesta.getIdent());
+        encuestaBD.setCodigo(encuesta.getCodigo());
+        encuestaBD.setNumEncuesta(encuesta.getNumEncuesta());
         encuestaBD.setJefeFamilia(encuesta.getJefeFamilia());
         encuestaBD.setSexJefeFamilia(encuesta.getSexJefeFamilia());
         encuestaBD.setNumPersonas(encuesta.getNumPersonas());

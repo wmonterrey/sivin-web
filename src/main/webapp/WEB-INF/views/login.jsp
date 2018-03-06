@@ -58,7 +58,7 @@
 	                    <button type="submit" class="btn btn-primary px-2"><spring:message code="login"/></button>
 	                </div>
 	                <div class="col-6 text-right">
-	                    <a href="<spring:url value="/resetPassword" htmlEscape="true "/>" class="btn btn-link px-0"><spring:message code="login.forgot.password"/></a>
+	                    <a href="#" class="btn btn-link px-0"><spring:message code="login.forgot.password"/></a>
 	                </div>
 	            </div>
 	            <div class="row">

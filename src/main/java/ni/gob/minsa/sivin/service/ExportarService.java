@@ -2,7 +2,6 @@ package ni.gob.minsa.sivin.service;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -41,7 +40,7 @@ public class ExportarService {
     
 	
 	
-	public StringBuffer getExportData(String opcion, Timestamp desde, Timestamp hasta) throws Exception{
+	public StringBuffer getExportData(String opcion, Long desde, Long hasta, String zonas, String zonafiltrar) throws Exception{
 		StringBuffer sb = new StringBuffer();
 		SessionImpl sessionImpl = (SessionImpl) sessionFactory.getCurrentSession();
         PreparedStatement pStatement = null;
@@ -54,28 +53,75 @@ public class ExportarService {
             //recuperar los nombres de las columnas
         	List<String> columns = new ArrayList<String>();
         	Statement st = sessionImpl.connection().createStatement();
-        	ResultSet rset = st.executeQuery("SELECT * FROM encuesta where 1=0");
-        	ResultSetMetaData md = rset.getMetaData();
-        	for (int i=1; i<=md.getColumnCount(); i++)
-        	{
-        		if (!(md.getColumnLabel(i).equalsIgnoreCase("identificador_equipo")||
-        				md.getColumnLabel(i).equalsIgnoreCase("identificador")||
-        				md.getColumnLabel(i).equalsIgnoreCase("pasivo")||
-        				md.getColumnLabel(i).equalsIgnoreCase("estado")||
-        				md.getColumnLabel(i).equalsIgnoreCase("segmento")||
-        				md.getColumnLabel(i).equalsIgnoreCase("encuestador")||
-        				md.getColumnLabel(i).equalsIgnoreCase("supervisor"))){
-        			columns.add(md.getColumnLabel(i));
-        		}
-        	}
         	
-            columnasSQL = parseColumnsTwo(columns);
-            columnasSQL = columnasSQL +",segmentos.codigo as codigosegmento,segmentos.comunidad,segmentos.municipio,segmentos.departamento,segmentos.region";
+        	if(opcion.equals("OPC_EXP_1")) {
+        		ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion <> 'noexport' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	} 
+        	}
+        	else if(opcion.equals("OPC_EXP_2")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccion 1' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_3")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'secciona' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_4")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionb' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_5")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionc' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_6")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'secciond' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_7")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccione' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_8")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionf' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_9")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'secciong' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_10")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionh' order by seccion, orden");
+	        	while(rset.next()) {
+	        		columns.add(rset.getString("CAMPO"));
+	        	}
+        	}
+        	columnasSQL = parseColumnsTwo(columns);
+            columnasSQL = columnasSQL +",segmentos.codigo as codigosegmento,segmentos.comunidad,segmentos.municipio,segmentos.departamento,segmentos.grupo,segmentos.region";
             
             columns.add("CODIGOSEGMENTO");
             columns.add("COMUNIDAD");
             columns.add("MUNICIPIO");
             columns.add("DEPARTAMENTO");
+            columns.add("GRUPO");
             columns.add("REGION");
             columnasHeader = parseColumns(columns);
             
@@ -85,19 +131,47 @@ public class ExportarService {
             //pasar a recuperar los datos. Setear parametros si los hay
             StringBuilder sqlStrBuilder = new StringBuilder();
             sqlStrBuilder.append("select ").append(columnasSQL).append(" from encuesta ").append(" inner join segmentos on encuesta.segmento = segmentos.identificador where encuesta.pasivo='0' ");
-            sqlStrBuilder.append(" and FECHAENTREVISTA between ? and ? ");
+            if(!(desde==null)) {
+            	sqlStrBuilder.append(" and FECHAENTREVISTA between ? and ? ");
+    		}
+            if(zonas.equals("ZON_REP_1")) {
+            	sqlStrBuilder.append(" and segmentos.GRUPO = ? ");
+    		}
+    		else if(zonas.equals("ZON_REP_2")) {
+    			sqlStrBuilder.append(" and segmentos.REGION = ? ");
+    		}
+    		else if(zonas.equals("ZON_REP_3")) {
+    			sqlStrBuilder.append(" and segmentos.departamento = ? ");
+    		}
+    		else if(zonas.equals("ZON_REP_4")) {
+    			sqlStrBuilder.append(" and segmentos.municipio = ? ");
+    		}
+    		else if(zonas.equals("ZON_REP_5")) {
+    			sqlStrBuilder.append(" and segmentos.identificador = ? ");
+    		}
+            
+            sqlStrBuilder.append(" order by fechaEntrevista, segmento, numEncuesta ");
             
             pStatement = sessionImpl.connection().prepareStatement(sqlStrBuilder.toString());
-            pStatement.setTimestamp(1, desde);
-            pStatement.setTimestamp(2, hasta);
+            
+            if(!(desde==null)) {
+    			Timestamp timeStampInicio = new Timestamp(desde);
+    			Timestamp timeStampFinal = new Timestamp(hasta);
+    			pStatement.setTimestamp(1, timeStampInicio);
+                pStatement.setTimestamp(2, timeStampFinal);
+                if(!zonas.equals("ZON_REP_0")) {
+                	pStatement.setString(3, zonafiltrar);
+                }
+    		}
+            else {
+            	if(!zonas.equals("ZON_REP_0")) {
+            		pStatement.setString(1, zonafiltrar);
+                }
+            }
+            
+            
             
             res = pStatement.executeQuery();
-            
-            ResultSetMetaData md2 = res.getMetaData();
-            for (int i=1; i<=md2.getColumnCount(); i++)
-        	{
-        		System.out.println(md2.getColumnLabel(i));
-        	}
             
             while(res.next()){
             	for(String col : columns){

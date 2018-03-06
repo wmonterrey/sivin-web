@@ -54,7 +54,22 @@ public class SegmentoService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("Select seg.municipio FROM Segmento seg where seg.pasive ='0' group by seg.municipio");
+		Query query = session.createQuery("Select seg.municipio FROM Segmento seg where seg.pasive ='0' group by seg.municipio order by seg.municipio");
+		// Retrieve all
+		return  query.list();
+	}
+	
+	/**
+	 * Regresa todos los grupos activos
+	 * 
+	 * @return una lista de <code>String</code>(s)
+	 */	
+	@SuppressWarnings("unchecked")
+	public List<String> getGruposActivos() {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("Select seg.grupo FROM Segmento seg where seg.pasive ='0' group by seg.grupo order by seg.grupo");
 		// Retrieve all
 		return  query.list();
 	}
@@ -70,7 +85,7 @@ public class SegmentoService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("Select seg.departamento FROM Segmento seg where seg.pasive ='0' group by seg.departamento");
+		Query query = session.createQuery("Select seg.departamento FROM Segmento seg where seg.pasive ='0' group by seg.departamento order by seg.departamento");
 		// Retrieve all
 		return  query.list();
 	}
@@ -85,7 +100,7 @@ public class SegmentoService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		// Create a Hibernate query (HQL)
-		Query query = session.createQuery("Select seg.region FROM Segmento seg where seg.pasive ='0' group by seg.region");
+		Query query = session.createQuery("Select seg.region FROM Segmento seg where seg.pasive ='0' group by seg.region order by seg.region");
 		// Retrieve all
 		return  query.list();
 	}

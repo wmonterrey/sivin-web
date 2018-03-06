@@ -76,6 +76,21 @@ public class EncuestaService {
 		return  query.list();
 	}
 	
+	/**
+	 * Regresa todas las encuestas con codigo duplicado
+	 * 
+	 * @return una lista de <code>Encuesta</code>(s)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Encuesta> getEncuestasCodigoDuplicado() {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM Encuesta enc where (enc.codigo in (Select enc2.codigo from Encuesta enc2 where enc.pasive ='0' group by (enc2.codigo) Having count(enc2.codigo)>1 ))");
+		// Retrieve all
+		return  query.list();
+	}
+	
 	
 	/**
 	 * Regresa todos las encuestas activas dependiendo del filtro
@@ -90,7 +105,7 @@ public class EncuestaService {
 
 	@SuppressWarnings("unchecked")
 	public List<Encuesta> getEncuestasSupervisar(String codigo, String nombre,
-			Long desde, Long hasta, String zonas, String zonafiltrar) {
+			Long desde, Long hasta, String zonas, String zonafiltrar, boolean checkSinSupervisar) {
 		//Set the SQL Query initially
 		String sqlQuery = "from Encuesta enc where 1=1";
 		// if not null set time parameters
@@ -100,11 +115,14 @@ public class EncuestaService {
 		if (!codigo.matches("")) {
 			sqlQuery = sqlQuery + " and enc.codigo =:codigo";
 		}
+		if (checkSinSupervisar) {
+			sqlQuery = sqlQuery + " and enc.supervisor is null";
+		}
 		if (!nombre.matches("")) {
 			sqlQuery = sqlQuery + " and lower(enc.jefeFamilia) like:nombre";
 		}
 		if(zonas.equals("ZON_REP_1")) {
-			sqlQuery = sqlQuery + " and enc.segmento.procedencia=:procedencia";
+			sqlQuery = sqlQuery + " and enc.segmento.grupo=:grupo";
 		}
 		else if(zonas.equals("ZON_REP_2")) {
 			sqlQuery = sqlQuery + " and enc.segmento.region=:region";
@@ -135,7 +153,7 @@ public class EncuestaService {
 			query.setParameter("nombre", "%"+nombre.toLowerCase()+"%");
 		}
 		if(zonas.equals("ZON_REP_1")) {
-			query.setParameter("procedencia", zonafiltrar);
+			query.setParameter("grupo", zonafiltrar);
 		}
 		else if(zonas.equals("ZON_REP_2")) {
 			query.setParameter("region", zonafiltrar);
