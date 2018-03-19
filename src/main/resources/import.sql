@@ -908,7 +908,39 @@ INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, 
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_8','8','OPC_EXP',NULL,'0',8,'0','Sección F');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_9','9','OPC_EXP',NULL,'0',9,'0','Sección G');
 INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_10','10','OPC_EXP',NULL,'0',10,'0','Sección H');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_11','11','OPC_EXP',NULL,'0',11,'0','Antro Datos Entrevistada');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_12','12','OPC_EXP',NULL,'0',12,'0','Antro Datos Niñ@ igual o mayor de 24 meses (talla)');
+INSERT INTO mensajes (messageKey, catKey, catRoot, en, isCat, orden, catPasive, es) VALUES ('OPC_EXP_13','13','OPC_EXP',NULL,'0',13,'0','Antro Datos Niñ@ menor de 24 meses (longitud)');
 
+
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('fnacent1','0',null,null,'fecha de nacimiento de la madre/cuidadora',1,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('edadent1','0',null,null,'Anote la edad en años cumplidos de la madre o cuidadora. Si no recuerda anotar 88.',2,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('entrealizada1','1','CAT_TEST','1=1=2','A quién se realiza la entrevista?',4,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesoTallaEnt1','1','CAT_TEST','1=1=2','Se tomo peso y talla a la entrevistada?',5,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesoent11','0',null,null,'Peso de la entrevistada en Kilogramos 1ra Medición',6,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesoent21','0',null,null,'Peso de la entrevistada en Kilogramos 2da Medición',7,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('tallaent11','0',null,null,'Talla de la entrevistada en centímetros 1ra Medición',8,'seccionantroent',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('tallaent21','0',null,null,'Talla de la entrevistada en centímetros 2da Medición',9,'seccionantroent',null);
+
+
+
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('fnacselec1','0',null,null,'Fecha de nacimiento niñ@ seleccionado',1,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('eselect1','0',null,null,'Edad en meses del niñ@ seleccionado',2,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('sexselec1','1','CAT_TEST','1=1=2','Sexo del niñ@ seleccionado',3,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesoTallaNin1','1','CAT_TEST','1=1=2','Se tomo peso y talla al niñ@?',4,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesonin11','0',null,null,'Peso del niñ@ en kilogramos 1ra Medición',5,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesonin21','0',null,null,'Peso del niñ@ en kilogramos 2da Medición',6,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('tallanin11','0',null,null,'Talla del niñ@ igual o mayor de 2 años (PARADO) 1ra Medición',7,'seccionantronin1',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('tallanin21','0',null,null,'Talla del niñ@ igual o mayor de 2 años (PARADO) 1ra Medición',8,'seccionantronin1',null);
+
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('fnacselec2','0',null,null,'Fecha de nacimiento niñ@ seleccionado',1,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('eselect2','0',null,null,'Edad en meses del niñ@ seleccionado',2,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('sexselec2','1','CAT_TEST','1=1=2','Sexo del niñ@ seleccionado',3,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesoTallaNin2','1','CAT_TEST','1=1=2','Se tomo peso y talla al niñ@?',4,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesonin12','0',null,null,'Peso del niñ@ en kilogramos 1ra Medición',5,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('pesonin22','0',null,null,'Peso del niñ@ en kilogramos 2da Medición',6,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('longnin12','0',null,null,'Longitud del niñ@ menor de 2 años (ACOSTADO) 1ra Medición',7,'seccionantronin2',null);
+Insert into ENCUESTADESC (CAMPO,ISCAT,CATALOGO,DESCCATALOGO,NOMBRE,ORDEN,SECCION,VALOR) values ('longnin22','0',null,null,'Longitud del niñ@ menor de 2 años (ACOSTADO) 2da Medición',8,'seccionantronin2',null);
 
 
 

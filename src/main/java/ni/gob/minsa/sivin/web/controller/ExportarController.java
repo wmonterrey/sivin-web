@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -63,13 +61,20 @@ public class ExportarController {
         	hasta = formatter.parse(dateRange.substring(dateRange.length()-10, dateRange.length())).getTime();
         }
     	
-        StringBuffer registros = exportarService.getExportData(opcion,desde,hasta, zonas, zonafiltrar);
-        InputStream inputStream = new ByteArrayInputStream(registros.toString().getBytes());
-        String mimeType = "text/csv";
-        response.setContentType(mimeType);
+        StringBuffer registros = null;
+        response.setContentType("application/csv");
         response.setHeader("Content-Disposition", String.format("inline; filename=\"" + "encuestasivin.csv" +"\""));
-        response.setContentLength(registros.length());
-        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        PrintWriter w = response.getWriter();
+        
+        try {
+			registros = exportarService.getExportData(opcion,desde,hasta, zonas, zonafiltrar);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        w.println(registros);
+        w.flush();
+        w.close();
     }
 
 	

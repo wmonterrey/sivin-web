@@ -55,7 +55,7 @@ public class ExportarService {
         	Statement st = sessionImpl.connection().createStatement();
         	
         	if(opcion.equals("OPC_EXP_1")) {
-        		ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion <> 'noexport' order by seccion, orden");
+        		ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion <> 'noexport' and seccion <> 'seccionantroent' and seccion <> 'seccionantronin1' and seccion <> 'seccionantronin2' order by seccion, orden");
 	        	while(rset.next()) {
 	        		columns.add(rset.getString("CAMPO"));
 	        	} 
@@ -114,6 +114,39 @@ public class ExportarService {
 	        		columns.add(rset.getString("CAMPO"));
 	        	}
         	}
+        	else if(opcion.equals("OPC_EXP_11")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionantroent' order by seccion, orden");
+	        	while(rset.next()) {
+	        		if(rset.getString("SECCION").equals("identificacion")){
+	        			columns.add(rset.getString("CAMPO"));
+	        		}
+	        		else {
+	        			columns.add(rset.getString("CAMPO").substring(0, rset.getString("CAMPO").length()-1));
+	        		}
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_12")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionantronin1' order by seccion, orden");
+	        	while(rset.next()) {
+	        		if(rset.getString("SECCION").equals("identificacion")){
+	        			columns.add(rset.getString("CAMPO"));
+	        		}
+	        		else {
+	        			columns.add(rset.getString("CAMPO").substring(0, rset.getString("CAMPO").length()-1));
+	        		}
+	        	}
+        	}
+        	else if(opcion.equals("OPC_EXP_13")) {
+	        	ResultSet rset = st.executeQuery("SELECT * FROM encuestadesc where seccion = 'identificacion' or seccion = 'seccionantronin2' order by seccion, orden");
+	        	while(rset.next()) {
+	        		if(rset.getString("SECCION").equals("identificacion")){
+	        			columns.add(rset.getString("CAMPO"));
+	        		}
+	        		else {
+	        			columns.add(rset.getString("CAMPO").substring(0, rset.getString("CAMPO").length()-1));
+	        		}
+	        	}
+        	}
         	columnasSQL = parseColumnsTwo(columns);
             columnasSQL = columnasSQL +",segmentos.codigo as codigosegmento,segmentos.comunidad,segmentos.municipio,segmentos.departamento,segmentos.grupo,segmentos.region";
             
@@ -123,6 +156,9 @@ public class ExportarService {
             columns.add("DEPARTAMENTO");
             columns.add("GRUPO");
             columns.add("REGION");
+            if(opcion.equals("OPC_EXP_11")) {
+            	columns.add("SEXOENT");
+            }
             columnasHeader = parseColumns(columns);
             
             sb.append(columnasHeader);
@@ -149,6 +185,15 @@ public class ExportarService {
     		else if(zonas.equals("ZON_REP_5")) {
     			sqlStrBuilder.append(" and segmentos.identificador = ? ");
     		}
+            if(opcion.equals("OPC_EXP_11")) {
+            	sqlStrBuilder.append(" and pesoTallaEnt = '1' ");
+            }
+            if(opcion.equals("OPC_EXP_12")) {
+            	sqlStrBuilder.append(" and pesoTallaNin = '1' and tallanin1 > 0");
+            }
+            if(opcion.equals("OPC_EXP_13")) {
+            	sqlStrBuilder.append(" and pesoTallaNin = '1' and longnin1 > 0");
+            }
             
             sqlStrBuilder.append(" order by fechaEntrevista, segmento, numEncuesta ");
             
@@ -175,7 +220,13 @@ public class ExportarService {
             
             while(res.next()){
             	for(String col : columns){
-            		Object val = res.getObject(col);
+            		Object val = null;
+            		if(col.equals("SEXOENT")) {
+            			val = "2";
+                	}
+            		else {
+            			val = res.getObject(col);
+            		}
             		if (val!=null){
             			if (val instanceof String) {
             				String valFormat = val.toString().replaceAll(ENTER,ESPACIO).replaceAll(SALTOLINEA,ESPACIO);
